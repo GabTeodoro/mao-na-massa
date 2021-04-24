@@ -1,0 +1,29 @@
+<table class="table table-hover table-striped">
+  <thead>
+  <tr>
+  <th>Ingrediente</th>
+  <th>Quantidade/Unidade</th>
+  <th>Data de Validade</th>
+  <th>Preço</th>
+  <!-- <th>Quantidade Alerta</th> -->
+  <th>Editar/Remover</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let ingredient of ingredients">
+  <tr>
+  <th>{{ingredient.ingredient}}</th>
+  <th>{{ingredient.quantity}} / {{ingredient.measurement}}</th>
+  <th>{{ingredient.expirationDate}}</th>
+  <th>{{ingredient.price}}</th>
+  <!-- <td>3 Unidades</td> -->
+  <td>
+  <button class="btn btn-primary m-1" data-title="Edit" (click)="onEditIngredient(ingredient.id)">Editar
+    <span class="glyphicon glyphicon-pencil"></span>
+  </button>
+  <button class="btn btn-danger m-1" data-title="Remove" (click)="onRemoveIngredient(ingredient.id)">Remover
+    <span class="glyphicon glyphicon-pencil"></span>
+  </button>
+  </td>
+  </tr>
+  </tbody>
+</table>
