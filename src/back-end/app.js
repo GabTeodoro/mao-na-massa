@@ -27,7 +27,7 @@ app.post("/maoNaMassa", (req, res, next) => {
     expirationDate: req.body.expirationDate,
     price: req.body.price,
   });
-  Ingredient.save().then((addIngredient) => {
+  ingredient.save().then((addIngredient) => {
     res.status(201).json({
       message: "Added ingredient",
       id: addIngredient.id,

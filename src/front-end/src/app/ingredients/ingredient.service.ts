@@ -21,7 +21,7 @@ export class IngredientService {
           return data.ingredients.map((ingredients) => {
             return {
               id: ingredients._id,
-              ingredient: ingredients.ingredients,
+              ingredient: ingredients.ingredient,
               quantity: ingredients.quantity,
               measurement: ingredients.measurement,
               measurementUnit: ingredients.measurementUnit,
@@ -41,31 +41,15 @@ export class IngredientService {
     return this.updatedIngredientsList.asObservable();
   }
 
-  addIngredient(
-    ingredient: string,
-    quantity: number,
-    measurement: string,
-    measurementUnit: string,
-    expirationDate: string,
-    price: number
-  ) {
-    const ingre: Ingredient = {
-      id: null,
-      ingredient: ingredient,
-      quantity: quantity,
-      measurement: measurement,
-      measurementUnit: measurementUnit,
-      expirationDate: expirationDate,
-      price: price,
-    };
+  addIngredient(ingredient: Ingredient) {
     this.httpClient
       .post<{ message: string; id: string }>(
         'http://localhost:3000/maoNaMassa',
-        ingre
+        ingredient
       )
       .subscribe((data) => {
-        ingre.id = data.id;
-        this.ingredients.push(ingre);
+        ingredient.id = data.id;
+        this.ingredients.push(ingredient);
         this.updatedIngredientsList.next([...this.ingredients]);
       });
   }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Ingredient } from '../ingredient.model';
 import { IngredientService } from '../ingredient.service';
 
 @Component({
@@ -12,14 +13,18 @@ export class AddIngredientsComponent {
 
   onAddIngredient(form: NgForm) {
     console.log('Inserindo...');
-    this.ingredientService.addIngredient(
-      form.value.ingredient,
-      form.value.quantity,
-      form.value.measurement,
-      form.value.measurementUnit,
-      form.value.expirationDate,
-      form.value.price
-    );
+
+    const ingredient: Ingredient = {
+      id: null,
+      ingredient: form.value.ingredient,
+      quantity: form.value.quantity,
+      measurement: form.value.measurement,
+      measurementUnit: form.value.measurementUnit,
+      expirationDate: form.value.expirationDate,
+      price: form.value.price,
+    }
+
+    this.ingredientService.addIngredient(ingredient);
     form.resetForm();
   }
 }
