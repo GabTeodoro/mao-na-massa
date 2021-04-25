@@ -13,12 +13,14 @@ export class ListIngredientsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ingredients: Ingredients[] = [{
+  ingredients: Ingredients[] = [
+  {
     id: "1",
     ingredient: 'Banana',
     quantity: 1,
     price: 2.5,
-    measurement: 'unidade',
+    measurement: '300',
+    measurementUnit: 'g',
     expirationDate: "24/04/2022"
   },
   {
@@ -26,7 +28,8 @@ export class ListIngredientsComponent implements OnInit {
       ingredient: 'Maçã',
       quantity: 1,
       price: 2.5,
-      measurement: 'unidade',
+      measurement: '200',
+      measurementUnit: 'g',
       expirationDate: "24/04/2022"
   }
 ]

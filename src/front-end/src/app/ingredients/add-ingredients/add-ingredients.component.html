@@ -1,32 +1,92 @@
-<form class="row g-3 m-4 w-80 m-auto mt-3 flex-column">
-  <div class="col-sm">
-    <label for="ingrediente">Ingrediente</label>
-    <input id="ingrediente" type="text" class="form-control" placeholder="Ingrediente" aria-label="City">
+<h2 class='text-center'>Cadastro de Ingredientes</h2>
+
+<form class="">
+  <div class="form-row ">
+    <div class="col-12 col-lg-8">
+      <label for="ingrediente">Ingrediente</label>
+      <input
+        id="ingrediente"
+        type="text"
+        class="form-control"
+        placeholder="Ingrediente"
+        aria-label="City"
+      />
+    </div>
   </div>
-  <div class="col-sm">
-    <label for="quantidade">Quantidade</label>
-    <input id="quantidade" type="text" class="form-control" placeholder="Quantidade" aria-label="City">
-  </div>
-  <div class="col-sm">
-    <label for="unidade">Unidade</label>
-    <input id="unidade" type="text" class="form-control" placeholder="Unidade" aria-label="City">
-  </div>
-  <div class="row g-3">
-  <div class="col-sm">
-    <label for="dt-validade">Data de Validade</label>
-    <input id="dt-validade" type="text" class="form-control" placeholder="Data de Validade" aria-label="City">
-  </div>
-  <div class="col-sm">
-    <label for="preco">Preço</label>
-    <input id="preco" type="text" class="form-control" placeholder="Preço" aria-label="City">
+  <div class="form-row">
+    <div class="col-12 col-lg-4">
+      <label for="quantidade">Quantidade</label>
+      <input
+        id="quantidade"
+        type="number"
+        class="form-control"
+        placeholder="Quantidade"
+        aria-label="City"
+      />
+    </div>
+    <div class="col-12 col-lg-4">
+      <label for="medida">Medida por Unidade</label>
+      <div class="input-group">
+        <input
+          id="medida"
+          type="number"
+          class="form-control"
+          placeholder="Unidade"
+          aria-label="City"
+        />
+        <div class="input-group-append">
+          <select class="form-control" name="unidade" id="unidade">
+            <option selected value="Kg">Kg</option>
+            <option value="g">g</option>
+
+            <option value="L">L</option>
+            <option value="ml">ml</option>
+
+            <option value="Oz">Oz</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- <div class="col-sm">
     <label for="qt-alerta">Quantidade de Alerta</label>
     <input id="qt-alerta" type="text" class="form-control" placeholder="Quantidade de Alerta">
   </div> -->
-</div>
-<div class="">
-  <button type="button" class="btn btn-primary botao-largura">Adicionar</button>
-</div>
-</form>
 
+  <div class="form-row">
+    <div class="col-12 col-lg-4">
+      <label for="dt-validade">Data de Validade</label>
+      <input
+        id="dt-validade"
+        type="date"
+        data-mask="00/00/0000"
+        class="form-control"
+        placeholder="Data de Validade"
+        aria-label="City"
+      />
+    </div>
+    <div class="col-12 col-lg-4">
+      <label for="preco">Preço</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">R$</span>
+        </div>
+        <input
+          id="preco"
+          type="number"
+          class="form-control"
+          placeholder="Preço"
+          aria-label="City"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-12 col-lg-8">
+
+      <button type="button" class="btn btn-primary botao-largura">
+        Adicionar
+      </button>
+    </div>
+  </div>
+</form>

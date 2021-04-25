@@ -1,40 +1,83 @@
-<nav class="navbar navbar-expand-lg navbar-light soft-yellow">
+<nav class="navbar navbar-expand-lg navbar-light soft-yellow mb-3">
   <div class="container-fluid w-80">
-    <a class="navbar-brand" href="#">Mão na Massa</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" tabindex="-1" href="/">Mão na Massa</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarReceitas"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            tabindex="-1"
+          >
             Receitas
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Minhas Receitas</a></li>
-            <li><a class="dropdown-item" href="#">Criar nova receita</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Cadastrar ingredientes</a></li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="navbarReceitas">
+            <a class="dropdown-item" href="#">Minhas Receitas</a>
+            <a class="dropdown-item" href="#">Criar nova receita</a>
+          </div>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li> -->
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarIngredientes"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            tabindex="-1"
+          >
+            Ingredientes
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarIngredientes">
+            <a class="dropdown-item" href="/add-ingredient"
+              >Cadastrar ingredientes</a
+            >
+            <a class="dropdown-item" href="/list-ingredients"
+              >Ver ingredientes</a
+            >
+          </div>
+        </li>
       </ul>
-      <div></div>
-      <div class="justify-content-end">
-         <form class="d-flex align-items-end w-auto">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
+
+      <div class="d-flex flex-lg-fill"></div>
+
+      <div class="d-flex">
+        <form class="input-group w-auto">
+          <input
+            class="form-control"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <div class="input-group-append">
+            <span for='search' class="input-group-text soft-yellow" id="basic-addon1">
+            <a href="#" id='search' >
+              <img src="assets/svg/search24px.svg" alt="Pesquisar" />
+            </a>
+            </span>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </nav>
-
