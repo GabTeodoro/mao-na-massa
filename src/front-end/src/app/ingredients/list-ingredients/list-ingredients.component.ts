@@ -1,45 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { Ingredients } from '../ingredients.model';
+import { Ingredient } from '../ingredient.model';
+import { IngredientService } from '../ingredient.service';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-ingredients',
   templateUrl: './list-ingredients.component.html',
-  styleUrls: ['./list-ingredients.component.css']
+  styleUrls: ['./list-ingredients.component.css'],
 })
 export class ListIngredientsComponent implements OnInit {
+  ingredients: Ingredient[] = [];
+  private ingredientSubscription: Subscription;
 
-  constructor() { }
+  constructor(public ingredientService: IngredientService) {}
+
+  onDeleteIngredient(id: string) {
+    this.ingredientService.deleteIngredient(id);
+  }
+
+  onEditIngredient(id: string) {
+    console.log('passou aqui editar ' + id);
+  }
 
   ngOnInit(): void {
+    this.ingredientService.getIngredients();
+    this.ingredientSubscription = this.ingredientService
+      .getUpdatedIngredientsListObservable()
+      .subscribe((ingredients: Ingredient[]) => {
+        this.ingredients = ingredients;
+      });
   }
 
-  ingredients: Ingredients[] = [
-  {
-    id: "1",
-    ingredient: 'Banana',
-    quantity: 1,
-    price: 2.5,
-    measurement: '300',
-    measurementUnit: 'g',
-    expirationDate: "24/04/2022"
-  },
-  {
-    id: "2",
-      ingredient: 'Maçã',
-      quantity: 1,
-      price: 2.5,
-      measurement: '200',
-      measurementUnit: 'g',
-      expirationDate: "24/04/2022"
+  ngOnDestroy(): void {
+    this.ingredientSubscription.unsubscribe();
   }
-]
-
-  onEditIngredient(id: string){
-    console.log('passou aqui editar ' + id)
-  }
-
-  onRemoveIngredient(id: string){
-    console.log('passou aqui remover ' + id)
-  }
-
 }

@@ -5,8 +5,8 @@ import { ListIngredientsComponent } from './ingredients/list-ingredients/list-in
 
 const routes: Routes = [
   //{ path: '', component:  } //home
-  { path: 'add-ingredient', component: AddIngredientsComponent },
-  { path: 'list-ingredients', component: ListIngredientsComponent }
+  { path: 'add/ingredient', component: AddIngredientsComponent },
+  { path: 'list/ingredients', component: ListIngredientsComponent }
 
 ];
 

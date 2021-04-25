@@ -1,41 +1,53 @@
-<h2 class='text-center'>Cadastro de Ingredientes</h2>
+<h2 class="text-center">Cadastro de Ingredientes</h2>
 
-<form class="">
-  <div class="form-row ">
+<form (submit)="onAddIngredient(ingredientForm)" #ingredientForm="ngForm">
+  <div class="form-row">
     <div class="col-12 col-lg-8">
-      <label for="ingrediente">Ingrediente</label>
+      <label for="ingredient">Ingrediente</label>
       <input
-        id="ingrediente"
+        id="ingredient"
         type="text"
         class="form-control"
         placeholder="Ingrediente"
         aria-label="City"
+        ngModel
+        #ingredient="ngModel"
       />
     </div>
   </div>
   <div class="form-row">
     <div class="col-12 col-lg-4">
-      <label for="quantidade">Quantidade</label>
+      <label for="quantity">Quantidade</label>
       <input
-        id="quantidade"
+        id="quantity"
         type="number"
         class="form-control"
         placeholder="Quantidade"
         aria-label="City"
+        ngModel
+        #quantity="ngModel"
       />
     </div>
     <div class="col-12 col-lg-4">
-      <label for="medida">Medida por Unidade</label>
+      <label for="measurement">Medida por Unidade</label>
       <div class="input-group">
         <input
-          id="medida"
+          id="measurement"
           type="number"
           class="form-control"
           placeholder="Unidade"
           aria-label="City"
+          ngModel
+          #measurement="ngModel"
         />
         <div class="input-group-append">
-          <select class="form-control" name="unidade" id="unidade">
+          <select
+            class="form-control"
+            name="measurementUnit"
+            id="measurementUnit"
+            ngModel
+            #measurementUnit="ngModel"
+          >
             <option selected value="Kg">Kg</option>
             <option value="g">g</option>
 
@@ -55,35 +67,38 @@
 
   <div class="form-row">
     <div class="col-12 col-lg-4">
-      <label for="dt-validade">Data de Validade</label>
+      <label for="expirationDate">Data de Validade</label>
       <input
-        id="dt-validade"
+        id="expirationDate"
         type="date"
         data-mask="00/00/0000"
         class="form-control"
         placeholder="Data de Validade"
         aria-label="City"
+        ngModel
+        #expirationDate="ngModel"
       />
     </div>
     <div class="col-12 col-lg-4">
-      <label for="preco">Preço</label>
+      <label for="price">Preço</label>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text">R$</span>
         </div>
         <input
-          id="preco"
+          id="price"
           type="number"
           class="form-control"
           placeholder="Preço"
           aria-label="City"
+          ngModel
+          #price="ngModel"
         />
       </div>
     </div>
   </div>
   <div class="form-row">
     <div class="col-12 col-lg-8">
-
       <button type="button" class="btn btn-primary botao-largura">
         Adicionar
       </button>
