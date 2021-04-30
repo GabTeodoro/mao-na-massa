@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); */
+
 .soft-yellow {
   --main-color: #fbf5c5;
 }
-
+body {
+  font-size: 1.125rem;
+}
 
 .w-80{
   width: 80%;

@@ -1,7 +1,9 @@
 .soft-yellow {
   background-color: var(--main-color)
 }
-
+*{
+  font-family: 'Lato', sans-serif;
+}
 .w-80{
   width: 80%;
 }

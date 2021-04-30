@@ -1,1 +1,21 @@
-<p>list-recipes works!</p>
+<mat-accordion *ngFor='let recipe of recipes'>
+  <mat-expansion-panel >
+    <mat-expansion-panel-header >
+      {{recipe.name}} | {{recipe.finalPrice | currency:'R$' }} | Data de Produção: {{recipe.productionDate}}
+    </mat-expansion-panel-header>
+    <p style="margin-top: 0.75rem;">Percentual  de lucro: {{recipe.profitPercentage}}%</p>
+    <p>Valor Minimo: {{recipe.minimumValue | currency:'R$' }}</p>
+    <div *ngIf='recipe.lines.length > 0' >
+      Ingredientes:
+      <ul *ngFor='let linha of recipe.lines' >
+        <li>Id: {{linha.id}} | Qtde: {{linha.quantityIngredient}} | total: {{linha.total}}</li>
+      </ul>
+    </div>
+
+    <mat-action-row>
+      <button mat-raised-button class="btn btn-primary" >Editar</button>
+      <button mat-raised-button class="btn btn-danger"  >Remover</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p *ngIf='recipes.length <= 0'>Sem Receitas disponíveis</p>
