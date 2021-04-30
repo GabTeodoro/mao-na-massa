@@ -10,6 +10,8 @@ import { ListIngredientsComponent } from './ingredients/list-ingredients/list-in
 
 import { IngredientService } from './ingredients/ingredient.service';
 import { AppRoutingModule } from './app-routing.module';
+import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
+import { ListRecipesComponent } from './recipes/list-recipes/list-recipes.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
     HeaderComponent,
     AddIngredientsComponent,
     ListIngredientsComponent,
+    AddRecipeComponent,
+    ListRecipesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [IngredientService],

@@ -1,24 +1,30 @@
 const express = require("express");
+const env = require('dotenv');
+env.config();
 const app = express();
 const cors = require("cors");
-const bodyParser = require("body-parser");
 app.use(cors());
 const mongoose = require("mongoose");
-const Ingredient = require("./models/ingredients");
-const RecipeHeader = require("./models/RecipeHearder");
-const RecipeLine = require("./models/RecipeLine");
+const Ingredient = require("./models/ingredients/ingredients");
+const RecipeHeader = require("./models/recipes/RecipeHeader");
+const RecipeLine = require("./models/recipes/RecipeLine");
+
+const userDB = process.env.MONGODB_USER;
+const passwordDB = process.env.MONGODB_PASSWORD;
+const clusterDB = process.env.MONGODB_CLUSTER;
+const databaseDB = process.env.MONGODB_DATABASE;
+
+
 mongoose
-  .connect(
-    "mongodb+srv://admin:admin@cluster0.3i7uo.mongodb.net/maoNaMassa?retryWrites=true&w=majority"
-  )
+  .connect(`mongodb+srv://${userDB}:${passwordDB}@${clusterDB}/${databaseDB}?retryWrites=true&w=majority`,{useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => {
     console.log("Conection OK");
   })
-  .catch(() => {
-    console.log("Conection NOK");
+  .catch((err) => {
+    console.log("Conection NOK\nError: "+err);
   });
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Requisições Ingredientes
 app.post("/maoNaMassa", (req, res, next) => {
