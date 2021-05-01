@@ -3,13 +3,14 @@ import { Ingredient } from './ingredient.model';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class IngredientService {
   private ingredients: Ingredient[] = [];
   private updatedIngredientsList = new Subject<Ingredient[]>();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   getIngredients(): void {
     this.httpClient
@@ -51,6 +52,7 @@ export class IngredientService {
         ingredient.id = data.id;
         this.ingredients.push(ingredient);
         this.updatedIngredientsList.next([...this.ingredients]);
+        this.router.navigate(['/'])
       });
   }
 
@@ -62,5 +64,34 @@ export class IngredientService {
           return ingre.id !== id;
         });
       });
+  }
+
+  getIngredient(idIngredient: any) {
+    return this.httpClient.get<{
+      _id: string;
+      ingredient: string;
+      quantity: number;
+      measurement: string;
+      measurementUnit: string;
+      expirationDate: string;
+      price: number;
+    }>(`http://localhost:3000/maoNaMassa/${idIngredient}`);
+  }
+
+  updateIngredient(id: string, ingredient: string,
+    quantity: number,
+    measurement: string,
+    measurementUnit: string,
+    expirationDate: string,
+    price: number) {
+    const i: Ingredient = {id, ingredient, quantity, measurement, measurementUnit, expirationDate, price}
+    this.httpClient.put(`http://localhost:3000/maoNaPassa/${id}`, i).subscribe((res)=>{
+      const copia = [...this.ingredients]
+      const indice = copia.findIndex(ingre => ingre.id === i.id)
+      copia[indice] = i;
+      this.ingredients = copia
+      this.updatedIngredientsList.next([...this.ingredients])
+      this.router.navigate(['/'])
+    })
   }
 }
