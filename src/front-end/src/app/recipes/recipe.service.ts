@@ -13,20 +13,23 @@ export class RecipeService {
   ngOnInit(): void {}
 
   getRecipe():void{
-    const retorno =[{
+    const retorno: Recipe[]= [{
       id:'123',
       lines:[{
-        id: '1',
-        ingredientId: '122222',
-        quantityIngredient:3,
-        total: 3
+        id:'12233',
+        ingredient: 'Ingrediente 1',
+        quantity: 3,
+        measurement: "200",
+        measurementUnit: 'g',
+        expirationDate: '10/05/21',
+        price: 3
       }],
       minimumValue: 3,
       priceSuggestion: 5,
       productionDate: 'hoje',
       profitPercentage: 10,
       finalPrice: 10,
-      name: 'teste da receita'
+      name: 'teste da receita',
     }]
     this.recipes = retorno
     // console.log(this.recipes)
@@ -43,6 +46,11 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe){
     console.log('Adding recipe: \n'+JSON.stringify(recipe))
+    this.httpClient
+      .post<{ message: string; recipeId: string; ingredientsId:string[] }>('https://localhost:3000/MaoNaMassa/recipe',recipe)
+      .subscribe(data =>{
+        
+    })
   }
 
 }

@@ -1,14 +1,8 @@
-
-export interface RecipeLine {
-  id: string,
-  ingredientId: string,
-  quantityIngredient:number,
-  total: number
-}
+import { Ingredient } from "../ingredients/ingredient.model";
 
 export interface Recipe {
   id: string,
-  lines:RecipeLine[],
+  lines:Ingredient[],
   minimumValue: number,
   priceSuggestion: number,
   productionDate: string,

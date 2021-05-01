@@ -6,8 +6,7 @@ const cors = require("cors");
 app.use(cors());
 const mongoose = require("mongoose");
 const ingredientRoutes = require('./routes/ingredients')
-const recipeLineRoutes = require('./routes/RecipeLine')
-const recipeHeaderRoutes = require('./routes/RecipeHeader')
+const recipeRoutes = require('./routes/recipe')
 
 const userDB = process.env.MONGODB_USER;
 const passwordDB = process.env.MONGODB_PASSWORD;
@@ -28,10 +27,7 @@ app.use(express.json());
 // Requisições Ingredientes
 app.use('/maoNaMassa', ingredientRoutes)
 
-//Requisições Recipe Line
-app.use('/maoNaMassa', recipeLineRoutes)
-
-// Requisições Recipe Header
-app.use('/maoNaMassa', recipeHeaderRoutes)
+//Requisições Recipe
+app.use('/maoNaMassa/recipe', recipeRoutes)
 
 module.exports = app;

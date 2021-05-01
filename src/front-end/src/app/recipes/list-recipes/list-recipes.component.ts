@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
@@ -12,18 +13,22 @@ export class ListRecipesComponent implements OnInit{
   recipes: Recipe[] = [{
     id:'123',
     lines:[{
-      id: '1',
-      ingredientId: '122222',
-      quantityIngredient:3,
-      total: 3
+      id:'12233',
+      ingredient: 'Ingrediente 1',
+      quantity: 3,
+      measurement: "200",
+      measurementUnit: 'g',
+      expirationDate: '10/05/21',
+      price: 3
     }],
     minimumValue: 3,
     priceSuggestion: 5,
     productionDate: 'hoje',
     profitPercentage: 10,
     finalPrice: 10,
-    name: 'teste da receita'
-  }];
+    name: 'teste da receita',
+  }]
+
   private recipeSubscription: Subscription;
   constructor(public recipeService: RecipeService) { }
 
@@ -36,6 +41,9 @@ export class ListRecipesComponent implements OnInit{
       });
   }
 
+  onAddRecipe(form:NgForm){
+    console.log(form.value)
+  }
 
   ngOnDestroy(): void {
     this.recipeSubscription.unsubscribe();

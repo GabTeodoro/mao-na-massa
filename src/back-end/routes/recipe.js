@@ -1,22 +1,25 @@
 const express = require("express");
 const router = express.Router();
-const RecipeHeader = require("../models/recipes/RecipeHeader");
+const Recipe = require("../models/recipes/Recipe");
 
-router.post("/maoNaMassa", (req, res, next) => {
-  const RecipeHeader = new RecipeHeader({
+router.post("/maoNaMassa/recipe", (req, res, next) => {
+  const recipe = new Recipe({
     name: req.body.name,
-    productionValue: req.body.productionValue,
+    lines: req.body.lines,
     suggestedPrice: req.body.suggestedPrice,
+    minimumValue: req.body.minimumValue,
     finalPrice: req.body.finalPrice,
     productionDate: req.body.productionDate,
-    percentProfit: req.body.percentProfit,
+    profitPercentage: req.body.profitPercentage,
   });
-  RecipeHeader.save().then((addRecipeHeader) => {
-    res.status(201).json({
-      message: "Added Recipe",
-      id: addRecipeHeader.id,
-    });
-  });
+  console.log(recipe)
+  // Recipe.save().then((addRecipe) => {
+  //   res.status(201).json({
+  //     message: "Added Recipe",
+  //     recipeId: addRecipe.id,
+  //     ingredientsId: [addRecipe.lines[0].id]
+  //   });
+  // });
 });
 
 router.get("/maoNaMassa", (req, res, next) => {
