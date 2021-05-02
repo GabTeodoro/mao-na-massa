@@ -2,11 +2,14 @@ const express = require("express");
 const env = require('dotenv');
 env.config();
 const app = express();
+
 const cors = require("cors");
-app.use(cors());
 const mongoose = require("mongoose");
 const ingredientRoutes = require('./routes/ingredients')
 const recipeRoutes = require('./routes/recipe')
+
+app.use(express.json());
+app.use(cors());
 
 const userDB = process.env.MONGODB_USER;
 const passwordDB = process.env.MONGODB_PASSWORD;
@@ -22,7 +25,6 @@ mongoose
     console.log("Conection NOK\nError: "+err);
   });
 
-app.use(express.json());
 
 // Requisições Ingredientes
 app.use('/maoNaMassa', ingredientRoutes)

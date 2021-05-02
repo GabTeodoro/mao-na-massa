@@ -47,9 +47,9 @@ export class RecipeService {
   addRecipe(recipe: Recipe){
     console.log('Adding recipe: \n'+JSON.stringify(recipe))
     this.httpClient
-      .post<{ message: string; recipeId: string; ingredientsId:string[] }>('https://localhost:3000/MaoNaMassa/recipe',recipe)
+      .post<{ message: string; id: string;}>('https://localhost:3000/MaoNaMassa/recipe',recipe)
       .subscribe(data =>{
-        
+
     })
   }
 

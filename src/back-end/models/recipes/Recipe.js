@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
 
+const linesSchema = mongoose.Schema({
+  ingredient: { type: "string", required: true},
+  quantity: { type: "number", required: true},
+  measurement: { type: "string", required: true},
+  measurementUnit: { type: "string", required: true},
+  expirationDate: { type: "string", required: true},
+  price: { type: "number", required: true}
+})
+
 const RecipeSchema = mongoose.Schema({
-    name: { type: "string", required: true },
-    lines: [
-      {id: { type: "string", required: false }},
-      {ingredient: { type: "string", required: true}},
-      {quantity: { type: "number", required: true}},
-      {measurement: { type: "string", required: true}},
-      {measurementUnit: { type: "string", required: true}},
-      {expirationDate: { type: "string", required: true}},
-      {price: { type: "number", required: true}}
-    ],
+    name: { type: "String", required: true },
+    lines:  {type: "array", required: true },
     suggestedPrice: { type: "number", required: true },
     minimumValue: { type: "number", required: true },
     finalPrice: { type: "number", required: true },
