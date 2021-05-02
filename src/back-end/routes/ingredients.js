@@ -1,8 +1,28 @@
 const express = require("express");
-const router = express.Router();
-const Ingredient = require("../models/ingredients/ingredients");
+const app = express();
+app.use(express.json());
 
-router.post("", (req, res, next) => {
+const dotenv = require("dotenv");
+dotenv.config();
+const Ingredient = require("../models/ingredients/ingredients");
+const mongoose = require("mongoose");
+
+const userDB = process.env.MONGODB_INGREDIENT_USER;
+const passwordDB = process.env.MONGODB_INGREDIENT_PASSWORD;
+const clusterDB = process.env.MONGODB_INGREDIENT_CLUSTER;
+const databaseDB = process.env.MONGODB_INGREDIENT_DATABASE;
+
+mongoose
+  .connect(`mongodb+srv://${userDB}:${passwordDB}@${clusterDB}/${databaseDB}?retryWrites=true&w=majority`,{useNewUrlParser: true, useUnifiedTopology: true})
+  .then(() => {
+    console.log("Conection OK");
+  })
+  .catch((err) => {
+    console.log("Conection NOK\nError: "+err);
+  });
+
+
+app.post("/MaoNaMassa", (req, res, next) => {
   const ingredient = new Ingredient({
     ingredient: req.body.ingredient,
     quantity: req.body.quantity,
@@ -19,7 +39,7 @@ router.post("", (req, res, next) => {
   });
 });
 
-router.get("", (req, res, next) => {
+app.get("/MaoNaMassa", (req, res, next) => {
   Ingredient.find().then((documents) => {
     res.status(200).json({
       message: "All right",
@@ -28,11 +48,11 @@ router.get("", (req, res, next) => {
   });
 });
 
-router.delete("/:id", (req, res, next) => {
+app.delete("/MaoNaMassa/:id", (req, res, next) => {
   Ingredient.deleteOne({ _id: req.params.id }).then((result) => {
     console.log(result);
     res.status(200).json({ message: "Deleted ingredient" });
   });
 });
 
-module.exports = router;
+app.listen(5000,()=>console.log("Ingredientes: Porta 5000"))
