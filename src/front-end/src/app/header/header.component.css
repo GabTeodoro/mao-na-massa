@@ -7,21 +7,29 @@
   background-color: var(--main-color);
 }
 
+.font-0{
+  font-size: 0;
+}
+
 .dropdown-item:hover{
   background-color: #cccccc46;
 }
 
-.h {
-  height: 1.5rem;
-  align-self: center;
+form *{
+  border-color: white;
+  background-color: white;
+  border-radius: 0.75rem;
 }
+
 a > img{
   margin: auto auto;
 }
+
 *{
   font-family: 'Lato', sans-serif;
   font-size: 1.125rem;
 }
+
 .w-80{
   width: 80%;
 }
