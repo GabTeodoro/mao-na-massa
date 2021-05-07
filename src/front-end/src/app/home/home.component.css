@@ -1,0 +1,25 @@
+body {
+  margin: 0px;
+}
+*{
+  font-family: 'Lato', sans-serif;
+}
+
+img {
+  width: 15.625rem;
+  height: 12.5rem;
+}
+
+.card-img{
+  border-radius: 1rem;
+}
+
+.btn:hover{
+  cursor: default;
+}
+.btn img{
+  cursor: pointer;
+}
+.card {
+  border: 0;
+}

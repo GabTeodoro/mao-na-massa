@@ -1,5 +1,14 @@
 .soft-yellow {
-  background-color: var(--main-color)
+  background-color: var(--main-color);
+}
+
+.dropdown-menu{
+  border: 0;
+  background-color: var(--main-color);
+}
+
+.dropdown-item:hover{
+  background-color: #cccccc46;
 }
 
 .h {
@@ -15,4 +24,43 @@ a > img{
 }
 .w-80{
   width: 80%;
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    transform:translateY(0rem);
+    opacity: 1;
+  }
+  0% {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slide-out {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slide-out {
+  animation-duration: 0.3s;
+  -webkit-animation-duration: 0.3s;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+  -webkit-animation-name: slide-out;
+  animation-name: slide-out;
 }

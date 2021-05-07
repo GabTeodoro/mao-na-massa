@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { ListRecipesComponent } from './recipes/list-recipes/list-recipes.component';
 import { RecipeService } from './recipes/recipe.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RecipeService } from './recipes/recipe.service';
     ListIngredientsComponent,
     AddRecipeComponent,
     ListRecipesComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
