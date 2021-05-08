@@ -19,6 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { ListRecipesComponent } from './recipes/list-recipes/list-recipes.component';
 import { RecipeService } from './recipes/recipe.service';
+import { ListItemsProducedComponent } from './itemsProduced/list-itemsProduced/list-itemsProduced.component';
+import { itemsProducedService } from './itemsProduced/itemsProduced.service';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -29,6 +31,7 @@ import { HomeComponent } from './home/home.component';
     ListIngredientsComponent,
     AddRecipeComponent,
     ListRecipesComponent,
+    ListItemsProducedComponent,
     HomeComponent,
   ],
   imports: [
@@ -41,7 +44,7 @@ import { HomeComponent } from './home/home.component';
     MatSliderModule,
     BrowserAnimationsModule
   ],
-  providers: [IngredientService,RecipeService],
+  providers: [IngredientService,RecipeService,itemsProducedService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
