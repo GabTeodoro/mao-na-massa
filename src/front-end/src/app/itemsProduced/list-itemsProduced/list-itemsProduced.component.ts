@@ -11,19 +11,18 @@ import { itemsProducedService } from '../itemsProduced.service';
 
 export class ListItemsProducedComponent implements OnInit{
     itemsProduced: itemsProduced[] = [{
-        id: '1',
-        RecipeId: '23',
+        id: '23',
         quantity: 4,
         productionDate: '2021/05/05',
-        expirationdate: '2021/05/10',
+        expirationDate: '2021/05/10',
         costValue: 10,
         totalValue: 20,
     }]
-  
+
     private itemsProducedSubscription: Subscription;
 
     constructor(public itemsProducedService: itemsProducedService) {}
-  
+
     ngOnInit(): void {
       this.itemsProducedService.getItemsProduced();
       this.itemsProducedSubscription = this.itemsProducedService
@@ -32,9 +31,8 @@ export class ListItemsProducedComponent implements OnInit{
           this.itemsProduced = itemsProduced;
         });
     }
-  
+
     ngOnDestroy(): void {
       this.itemsProducedSubscription.unsubscribe();
     }
   }
-  

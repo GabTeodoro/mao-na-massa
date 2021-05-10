@@ -22,6 +22,7 @@ import { RecipeService } from './recipes/recipe.service';
 import { ListItemsProducedComponent } from './itemsProduced/list-itemsProduced/list-itemsProduced.component';
 import { itemsProducedService } from './itemsProduced/itemsProduced.service';
 import { HomeComponent } from './home/home.component';
+import { AddItemsProducedComponent } from './itemsProduced/add-items-produced/add-items-produced.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HomeComponent } from './home/home.component';
     ListRecipesComponent,
     ListItemsProducedComponent,
     HomeComponent,
+    AddItemsProducedComponent,
   ],
   imports: [
     BrowserModule,

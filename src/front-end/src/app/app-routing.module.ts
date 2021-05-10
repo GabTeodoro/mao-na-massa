@@ -14,6 +14,7 @@ import { ListRecipesComponent } from './recipes/list-recipes/list-recipes.compon
 // Items Produced
 // import { AddItemsProducedComponent } from './itemsProduced/add-itemsProduced/;
 import { ListItemsProducedComponent } from './itemsProduced/list-itemsProduced/list-itemsProduced.component';
+import { AddItemsProducedComponent } from './itemsProduced/add-items-produced/add-items-produced.component';
 
 const routes: Routes = [
   { path: '', component:  HomeComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'list/ingredients', component: ListIngredientsComponent },
   { path: 'add/recipe', component: AddRecipeComponent },
   { path: 'list/recipes', component: ListRecipesComponent },
-  { path: 'list/itemsProduced', component: ListItemsProducedComponent },
+  { path: 'add/items-produced', component: AddItemsProducedComponent },
+  { path: 'list/items-produced', component: ListItemsProducedComponent },
 ];
 
 @NgModule({

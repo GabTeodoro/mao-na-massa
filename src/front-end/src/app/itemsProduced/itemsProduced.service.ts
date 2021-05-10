@@ -15,11 +15,10 @@ export class itemsProducedService {
 
   getItemsProduced():void{
     const retorno: itemsProduced[]= [{
-      id: '1',
-      RecipeId: '23',
+      id: '23',
       quantity: 4,
       productionDate: '20210505',
-      expirationdate: '20210510',
+      expirationDate: '20210510',
       costValue: 10,
       totalValue: 20,
     }]
