@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "rootDirs": [
+     "./src",
+     "./test"
+    ],
+    "outDir": "./dist",
+    "noEmitOnError": true,
+    "target": "ES6",
+    "watch": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "moduleResolution": "node"
+  }
+}
