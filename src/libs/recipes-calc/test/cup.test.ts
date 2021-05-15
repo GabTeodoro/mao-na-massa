@@ -29,10 +29,10 @@ describe("Teste de conversão de unidade para Cup", () => {
     const cup = new Cup();
 
     test("10 Liter para Cup", () => {
-        expect(cup.unitConverter(Unit.Liter, 10)).toBe(42.3);
+        expect(cup.unitConverter(Unit.Liter, 10)).toBeCloseTo(42.3);
     })
     test("10 Mililiter para Cup", () => {
-        expect(cup.unitConverter(Unit.Mililiter, 10)).toBe(0.0423);
+        expect(cup.unitConverter(Unit.Mililiter, 10)).toBeCloseTo(0.0423);
     })
     test("10 Liquid American Ounce para cup", () => {
         expect(cup.unitConverter(Unit.LiquidAmericanOunce, 10)).toBe(1.23);
