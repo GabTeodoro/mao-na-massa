@@ -14,7 +14,7 @@ export class Cup implements BasicUnit {
                 value = 4.23;
                 break;
             case Unit.LiquidAmericanOunce:
-                value = 8.35;
+                value = 0.123;
                 break;
             case Unit.AmericanTablespoon:
                 value = 0.047; 
