@@ -70,7 +70,7 @@ export class Gram implements BasicUnit {
     }
 }
 
-export class Litter implements BasicUnit {
+export class Liter implements BasicUnit {
     getBaseValueBy(unit: Unit): number {
         let value: number;
 
