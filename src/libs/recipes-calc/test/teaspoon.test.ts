@@ -5,7 +5,7 @@ describe("Testes de retorno do valor base das unidades para Teaspoon", () => {
     const teaspoon = new Teaspoon();
 
     test("Teste para o valor base de Teaspoon para AmericanCup", () => {
-        expect(teaspoon.getBaseValueBy(Unit.AmericanCup)).toBeCloseTo(48.6922); //received 48.
+        expect(teaspoon.getBaseValueBy(Unit.AmericanCup)).toBe(48);
     });
 
     test("Teste para o valor base de Teaspoon para Liter", () => {
@@ -33,7 +33,7 @@ describe("Teste de conversão de unidade para Teaspoon", () => {
     const teaspoon = new Teaspoon();
 
     test("10 Teaspoon para AmericanCup", () => {
-        expect(teaspoon.unitConverter(Unit.AmericanCup, 10)).toBeCloseTo(486.922); //received 480.
+        expect(teaspoon.unitConverter(Unit.AmericanCup, 10)).toBe(480);
     })
     test("10 Liter para Teaspoon", () => {
         expect(teaspoon.unitConverter(Unit.Liter, 10)).toBeCloseTo(2028.84);

@@ -20,11 +20,11 @@ describe("Testes de retorno do valor base das unidade para Grama", () => {
         expect(gram.getBaseValueBy(Unit.AmericanCup)).toBe(236.59);
     });
 
-    test("Teste para o valor base de grama para Tablespoon", () => {
+    test("Teste para o valor base de grama para AmericanTablespoon", () => {
         expect(gram.getBaseValueBy(Unit.AmericanTablespoon)).toBe(0.047);
     });
 
-    test("Teste para o valor base de grama para Teaspoon", () => {
+    test("Teste para o valor base de grama para AmericanTeaspoon", () => {
         expect(gram.getBaseValueBy(Unit.AmericanTeaspoon)).toBe(0.24);
     });
 });

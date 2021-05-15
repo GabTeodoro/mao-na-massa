@@ -4,7 +4,7 @@ import { Ounce } from "../src/units";
 describe("Testes de retorno do valor base das unidades para Onça", () => {
     const ounce = new Ounce();
 
-    test("Teste para o valor base de onça para American Cup", () => {
+    test("Teste para o valor base de onça para AmericanCup", () => {
         expect(ounce.getBaseValueBy(Unit.AmericanCup)).toBe(8.11);
     });
 
@@ -16,7 +16,7 @@ describe("Testes de retorno do valor base das unidades para Onça", () => {
         expect(ounce.getBaseValueBy(Unit.Mililiter)).toBe(0.033);
     });
 
-    test("Teste para o valor base de onça para Liquid American Ounce", () => {
+    test("Teste para o valor base de onça para LiquidAmericanOunce", () => {
         expect(ounce.getBaseValueBy(Unit.LiquidAmericanOunce)).toBe(1);
     });
 
@@ -40,9 +40,6 @@ describe("Teste de conversão de unidade para Onça", () => {
     })
     test("10 Mililiter para onça", () => {
         expect(ounce.unitConverter(Unit.Mililiter, 10)).toBe(0.33);
-    })
-    test("10 Liquid American Ounce para onça", () => {
-        expect(ounce.unitConverter(Unit.LiquidAmericanOunce, 10)).toBe(10);
     })
     test("10 Tablespoon para onça", ()=> {
         expect(ounce.unitConverter(Unit.AmericanTablespoon, 10)).toBe(5);

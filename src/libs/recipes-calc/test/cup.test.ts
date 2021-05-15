@@ -1,7 +1,7 @@
 import { Unit } from "../src/basicUnit";
 import { Cup } from "../src/units";
 
-describe("Testes de retorno do valor base das unidades para Copo", () => {
+describe("Testes de retorno do valor base das unidades para Cup", () => {
     const cup = new Cup();
 
     test("Teste para o valor base de Cup para Liter", () => {
@@ -12,15 +12,15 @@ describe("Testes de retorno do valor base das unidades para Copo", () => {
         expect(cup.getBaseValueBy(Unit.Mililiter)).toBe(0.00423);
     });
 
-    test("Teste para o valor base de Cup para Liquid American Ounce", () => {
+    test("Teste para o valor base de Cup para LiquidAmericanOunce", () => {
         expect(cup.getBaseValueBy(Unit.LiquidAmericanOunce)).toBe(0.123);
     });
 
-    test("Teste para o valor base de Cup para American Tablespoon", () => {
+    test("Teste para o valor base de Cup para AmericanTablespoon", () => {
         expect(cup.getBaseValueBy(Unit.AmericanTablespoon)).toBe(0.047);
     });
 
-    test("Teste para o valor base de cup para American Teaspoon", () => {
+    test("Teste para o valor base de cup para AmericanTeaspoon", () => {
         expect(cup.getBaseValueBy(Unit.AmericanTeaspoon)).toBe(0.24);
     });
 });
