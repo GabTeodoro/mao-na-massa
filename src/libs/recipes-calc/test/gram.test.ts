@@ -1,5 +1,5 @@
 import { Unit } from "../src/basicUnit";
-import { Gram } from "./units";
+import { Gram } from "../src/units";
 
 describe("Testes de retorno do valor base das unidade para Grama", () => {
     const gram = new Gram();
@@ -17,6 +17,6 @@ describe("Testes de conversâo de unidade para Grama", () => {
     const gram = new Gram();
 
     test("10 Tablespoon para gramas", () => {
-        expect(gram.unitConverter(Unit.AmericanTablespoon, 10)).toBe(0.48);
+        expect(gram.unitConverter(Unit.AmericanTablespoon, 10)).toBe(0.47);
     });
 });

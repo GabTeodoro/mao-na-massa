@@ -109,7 +109,32 @@ export class Litter implements BasicUnit {
 
 export class Ounce implements BasicUnit {
     getBaseValueBy(unit: Unit): number {
-        throw new Error("Method not implemented.");
+        let value: number;
+
+        switch (unit) {
+            case Unit.AmericanCup:
+                value = 8.11;
+                break;
+            case Unit.Kilogram:
+            case Unit.Liter:
+                value = 33.81;
+                break;
+            case Unit.Mililiter:
+                value = 0.033;
+                break;
+            case Unit.LiquidAmericanOunce:
+                value = 1;
+                break;
+            case Unit.AmericanTablespoon:
+                value = 0.5; 
+                break;                       
+            case Unit.AmericanTeaspoon:
+                value = 0.16;
+                break;
+            default:
+                value = 0.00;
+        }
+        return value;
     }
 
     unitConverter(unit: Unit, value: number): number {
