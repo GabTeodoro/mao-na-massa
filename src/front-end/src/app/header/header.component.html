@@ -75,6 +75,26 @@
             <a class="dropdown-item" href="/list/ingredients">Minhas Ingredientes</a>
           </div>
         </li>
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle font-0"
+          href="#"
+          id="navbarNotificacoes"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          tabindex="-1">
+          <img class="d-block bell-notification" src="assets/svg/bell.svg" alt="Notificações" />
+          <div [ngClass]="{'has-notification': verif,'no-notification':!verif}"></div>
+        </a>
+          <div class="dropdown-menu slide-out nav-notification-width" aria-labelledby="navbarNotificacoes">
+            <a *ngFor="let notification of notifications" href="#" class="dropdown-item ">
+              <span class="d-inline-block notification-text text-wrap">{{notification.message}}</span>
+              <div class="flex-1"></div>
+              <span class="notification-date">{{notification.date}}</span>
+            </a>
+          </div>
+        </li>
 
       </ul>
 
