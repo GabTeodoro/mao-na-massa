@@ -9,8 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:server": "nodemon ../server.js",
-    "start:ingredient": "",
-    "start:recipe": ""
+    "start:ingredient": "nodemon ../back-end/routes/ingredients.js",
+    "start:recipe": "",
+    "start:serviceBus":"nodemon ../back-end/routes/serviceBus.js"
   },
   "private": true,
   "dependencies": {

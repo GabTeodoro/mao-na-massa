@@ -22,22 +22,41 @@ mongoose
   });
 
 
-app.post("/MaoNaMassa", (req, res, next) => {
-  const ingredient = new Ingredient({
-    ingredient: req.body.ingredient,
-    quantity: req.body.quantity,
-    measurement: req.body.measurement,
-    measurementUnit: req.body.measurementUnit,
-    expirationDate: req.body.expirationDate,
-    price: req.body.price,
-  });
-  ingredient.save().then((addIngredient) => {
-    res.status(201).json({
-      message: "Added ingredient",
-      id: addIngredient.id,
+const functions = {
+  addIngredient: (ingredient)=>{
+    const ingredient = new Ingredient({
+      ingredient: '',
+      quantity: 0,
+      measurement: 0,
+      measurementUnit: '',
+      expirationDate: '',
+      price: 0
+    })
+    ingredient.save().then((addIngredient) => {
+      res.status(201).json({
+        message: "Added ingredient",
+        id: addIngredient.id,
+      });
     });
-  });
-});
+  }
+}
+
+// app.post("/MaoNaMassa", (req, res, next) => {
+//   const ingredient = new Ingredient({
+//     ingredient: req.body.ingredient,
+//     quantity: req.body.quantity,
+//     measurement: req.body.measurement,
+//     measurementUnit: req.body.measurementUnit,
+//     expirationDate: req.body.expirationDate,
+//     price: req.body.price,
+//   });
+//   ingredient.save().then((addIngredient) => {
+//     res.status(201).json({
+//       message: "Added ingredient",
+//       id: addIngredient.id,
+//     });
+//   });
+// });
 
 app.get("/MaoNaMassa", (req, res, next) => {
   Ingredient.find().then((documents) => {
