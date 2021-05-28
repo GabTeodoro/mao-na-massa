@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const ingredientRoutes = require('./routes/ingredients')
 const recipeRoutes = require('./routes/recipe');
 const itemsProducedRoutes = require('./routes/itemsProduced');
+const usuario = require("./routes/usuario");
 
 app.use(express.json());
 app.use(cors());
@@ -35,5 +36,8 @@ app.use('/maoNaMassa/recipe', recipeRoutes)
 
 //Requisições ItemsProduced
 app.use('/maoNaMassa/itemsProduced', itemsProducedRoutes)
+
+//Requisições Usuario
+app.use('/api/usuario', usuario);
 
 module.exports = app;
