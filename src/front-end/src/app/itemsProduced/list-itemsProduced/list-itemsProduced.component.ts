@@ -25,7 +25,8 @@ export class ListItemsProducedComponent implements OnInit{
 
     ngOnInit(): void {
       this.itemsProducedService.getItemsProduced();
-      this.itemsProducedSubscription = this.itemsProducedService
+      this.itemsProducedSubscription =
+        this.itemsProducedService
         .getUpdateditemsProducedListObservable()
         .subscribe((itemsProduced: itemsProduced[]) => {
           this.itemsProduced = itemsProduced;

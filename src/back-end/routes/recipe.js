@@ -16,6 +16,7 @@ router.post("", (req, res, next) => {
     productionDate: req.body.productionDate,
     profitPercentage: req.body.profitPercentage,
   });
+  console.log(recipe);
   // Recipe.save().then((addRecipe) => {
   //   res.status(201).json({
   //     message: "Added Recipe",
