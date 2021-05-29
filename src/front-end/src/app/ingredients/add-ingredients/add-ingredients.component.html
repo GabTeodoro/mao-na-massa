@@ -1,8 +1,8 @@
-<h2 class="text-center">Cadastro de Ingredientes</h2>
+<h2 class="my-3">Cadastro de Ingredientes</h2>
 
 <form (submit)="onAddIngredient(ingredientForm)" #ingredientForm="ngForm">
   <div class="form-row">
-    <div class="col-12 col-lg-8">
+    <div class="col-12 col-lg-12">
       <label for="ingredient">Ingrediente</label>
       <input
         id="ingredient"
@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-lg-6">
       <label for="quantity">Quantidade</label>
       <input
         id="quantity"
@@ -30,7 +30,7 @@
         #quantity="ngModel"
       />
     </div>
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-lg-6">
       <label for="measurement">Medida por Unidade</label>
       <div class="input-group">
         <input
@@ -69,7 +69,7 @@
   </div> -->
 
   <div class="form-row">
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-lg-6">
       <label for="expirationDate">Data de Validade</label>
       <input
         id="expirationDate"
@@ -83,7 +83,7 @@
         #expirationDate="ngModel"
       />
     </div>
-    <div class="col-12 col-lg-4">
+    <div class="col-12 col-lg-6">
       <label for="price">Preço</label>
       <div class="input-group">
         <div class="input-group-prepend">
@@ -103,7 +103,7 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="col-12 col-lg-8">
+    <div class="col-12 col-lg-12">
       <button type="submit" class="btn btn-primary botao-largura">
         Adicionar
       </button>
