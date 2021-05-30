@@ -30,22 +30,21 @@ export class AddIngredientsComponent implements OnInit {
         this.paramValue = httpParams.get('idIngredient');
         if (this.paramValue){
           this.modo = 'edit';
-        this.idIngredient = this.paramValue;
-        this.ingredientService
-        .getIngredient(this.idIngredient)
-        .subscribe((dataIngre) => {
-          // console.log(dataIngre.ingredients)
-          this.ingredient = dataIngre.ingredients[0];
-          const ing = {
-            ingredient : this.ingredient.ingredient,
-            quantity: this.ingredient.quantity,
-            measurement: this.ingredient.measurement,
-            measurementUnit: this.ingredient.measurementUnit,
-            expirationDate: this.ingredient.expirationDate,
-            price: this.ingredient.price,
-          }
-          this.ingredientForm.setValue(ing);
-        });
+          this.idIngredient = this.paramValue;
+          this.ingredientService
+          .getIngredient(this.idIngredient)
+          .subscribe((dataIngre) => {
+            this.ingredient = dataIngre.ingredients[0];
+            const ing = {
+              ingredient : this.ingredient.ingredient,
+              quantity: this.ingredient.quantity,
+              measurement: this.ingredient.measurement,
+              measurementUnit: this.ingredient.measurementUnit,
+              expirationDate: this.ingredient.expirationDate,
+              price: this.ingredient.price,
+            }
+            this.ingredientForm.setValue(ing);
+          });
         }
       }else{
         this.modo = 'add';
@@ -56,9 +55,6 @@ export class AddIngredientsComponent implements OnInit {
 
   onAddIngredient(form: NgForm) {
     if (this.modo === 'add'){
-
-      console.log('Adding...');
-
       const ingredient: Ingredient = {
         id: null,
         ingredient: form.value.ingredient,
@@ -82,7 +78,6 @@ export class AddIngredientsComponent implements OnInit {
         price: form.value.price,
       };
       this.ingredientService.updateIngredient(ingredient)
-      console.log("teste")
     }
   }
 }

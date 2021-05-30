@@ -21,7 +21,6 @@ export class ListIngredientsComponent implements OnInit {
   }
 
   onEditIngredient(id: string) {
-    console.log("editando " + id)
     this.router.navigate(['add/ingredient'],{ queryParams: { idIngredient: id } });
   }
 

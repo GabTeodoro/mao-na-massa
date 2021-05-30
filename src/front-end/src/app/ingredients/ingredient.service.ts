@@ -23,8 +23,7 @@ export class IngredientService {
       .get<{ message: string; ingredients: any }>(
         this.urlIngredient
       )
-      .pipe(
-        map((data) => {
+      .pipe(map((data) => {
           return data.ingredients.map((ingredients) => {
             return {
               id: ingredients._id,

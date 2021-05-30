@@ -10,8 +10,7 @@
     "e2e": "ng e2e",
     "start:server": "nodemon ../server.js",
     "start:ingredient": "nodemon ../back-end/routes/ingredients.js",
-    "start:recipe": " nodemon ../back-end/routes/recipe.js",
-    "start:serviceBus": "nodemon ../back-end/routes/serviceBus.js"
+    "start:recipe": " nodemon ../back-end/routes/recipe.js"
   },
   "private": true,
   "dependencies": {

@@ -67,9 +67,7 @@ app.put("/MaoNaMassa/:id", (req,res)=>{
     expirationDate: req.body.expirationDate,
     price: req.body.price
   }
-  console.log(ingred)
-  res.status(201).send({message:"Atualizou!!"})
-  Ingredient.updateOne({ _id: req.body.id},ingred).catch((err)=>console.log("Erro salvando.\nErro: "+err));
+  Ingredient.updateOne({ _id: req.body.id},ingred).then(()=>res.status(201).send({message:"Atualizou!!"})).catch((err)=>console.log("Erro salvando.\nErro: "+err));
 })
 
 app.delete("/MaoNaMassa/:id",(req, res)=>{

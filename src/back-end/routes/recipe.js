@@ -6,6 +6,8 @@ app.use(express.json());
 const Recipe = require("../models/recipes/Recipe");
 const mongoose = require("mongoose");
 const axios = require("axios");
+const cors = require("cors");
+app.use(cors());
 
 const userDB = process.env.MONGODB_RECIPE_USER;
 const passwordDB = process.env.MONGODB_RECIPE_PASSWORD;
@@ -20,44 +22,57 @@ mongoose
   })
   .catch((err) => {
     console.log("Conection NOK\nError: "+err);
-  });
+});
 
-const functions = {
-  createdRecipe: (recipe)=>{
-    console.log("Cadastrou a receita!!!!!!!!!!\n"+recipe)
-  },
-  createRecipe: (recipe) =>{
-    console.log(recipe)
-    axios.post(serviceBusURL,{
-      type: 'createdRecipe',
-      data: recipe
-    })
-    // recipe.save().then(document =>{
-    //   axios.post(serviceBusURL,{
-    //     type: 'createdRecipe',
-    //     data: recipe
-    //   })
-    // })
-  },
+app.put('/MaoNaMassa',(req, res)=>{
+  const recipe = new Recipe( {
+    lines:req.body.lines,
+    minimumValue: req.body.minimumValue,
+    suggestedPrice: req.body.priceSuggestion,
+    productionDate: req.body.productionDate,
+    profitPercentage: req.body.profitPercentage,
+    finalPrice: req.body.finalPrice,
+    name: req.body.name
+  })
+  recipe.save().then((documents)=>{
+    console.log(documents)
+    res.status(201).send({message:"Tudo certo",id: documents._id})
+  }).catch((err)=>console.log("Erro salvando.\nErro: "+err))
+})
 
-  getRecipes: ()=>{
-    Recipe.find().then((documents) => {
-      axios.post(serviceBusURL,{
-        type: 'returnAllRecipes',
-        data: documents
-      })
-    });
-  },
-
-  deleteRecipe: (id)=>{
-    Recipe.deleteOne({ _id: id }).then((result) => {
-      console.log(result);
-      axios.post(serviceBusURL,{
-        type: 'deletedRecipe',
-        data: { message: "Deleted Recipe" }
-      })
-    });
+app.put('/MaoNaMassa/:id',(req, res)=>{
+  const recipe = {
+    lines:req.body.lines,
+    minimumValue: req.body.minimumValue,
+    suggestedPrice: req.body.priceSuggestion,
+    productionDate: req.body.productionDate,
+    profitPercentage: req.body.profitPercentage,
+    finalPrice: req.body.finalPrice,
+    name: req.body.name
   }
+  // console.log(recipe)
+  Recipe.updateOne({ _id: req.params.id},recipe).then(()=>res.status(201).send({message:"Atualizou!!"})).catch((err)=>console.log("Erro salvando.\nErro: "+err));
+})
+
+app.get('/MaoNaMassa',(req, res)=>{
+  Recipe.find().then((documents)=>{
+    res.status(201).send({message: "OK",recipes:documents});
+  })
+})
+
+app.get('/MaoNaMassa/:id',(req, res)=>{
+  Recipe.find({ _id: req.params.id}).then((documents)=>{
+    res.status(201).send({message: "OK",recipe:documents});
+  }).catch((err)=>console.log("Erro consultando.\nErro: "+err))
+})
+
+app.delete("/MaoNaMassa/:id", (req, res)=>{
+  Recipe.deleteOne({ _id: req.params.id }).then((result) => {
+    res.status(201).send({message:"Excluído"})
+  }).catch((err)=>console.log("Erro deletando.\nErro: "+err));
+})
+const functions = {
+
 }
 
 
@@ -68,7 +83,7 @@ app.post("/MaoNaMassa", (req, res, next) => {
   }catch(err){
     console.log("A função " + req.body.type +" não é daqui")
   }
-  res.send({msg:ok}).status(201)
+  res.send({msg:'ok'}).status(201)
   // Recipe.save().then((addRecipe) => {
   //   res.status(201).json({
   //     message: "Added Recipe",
