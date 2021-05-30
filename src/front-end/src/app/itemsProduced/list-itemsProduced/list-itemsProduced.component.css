@@ -6,11 +6,12 @@
     list-style-type: initial;
   }
   mat-expansion-panel{
+    margin-bottom: 0.6rem;
     padding: 5px 0;
-  
+
     box-shadow: 2px 2px 5px 1px #ccc;
   }
-  
+
   mat-expansion-panel-header {
     height: 2rem;
     margin-bottom: 1px solid black;
@@ -26,9 +27,9 @@
   span  + span {
     margin-left: 1rem;
     padding-left: 1rem;
-  
+
     position: relative;
-  
+
   }
   span + span::before {
     content: '';
@@ -41,9 +42,8 @@
     top: 50%;
     transform: translate(-50%,-50%);
   }
-  
-  
+
+
   p{
     margin: 1rem;
   }
-  
