@@ -5,13 +5,13 @@ const app = express();
 app.use(express.json());
 const Recipe = require("../models/recipes/Recipe");
 const mongoose = require("mongoose");
-const axios = require('axios');
+const axios = require("axios");
 
 const userDB = process.env.MONGODB_RECIPE_USER;
 const passwordDB = process.env.MONGODB_RECIPE_PASSWORD;
 const clusterDB = process.env.MONGODB_RECIPE_CLUSTER;
 const databaseDB = process.env.MONGODB_RECIPE_DATABASE;
-const serviceBusURL = 'http://localhost:10000/MaoNaMassa'
+const serviceBusURL = 'http://localhost:3000/MaoNaMassa'
 
 mongoose
   .connect(`mongodb+srv://${userDB}:${passwordDB}@${clusterDB}/${databaseDB}?retryWrites=true&w=majority`,{useNewUrlParser: true, useUnifiedTopology: true})
@@ -24,10 +24,14 @@ mongoose
 
 const functions = {
   createdRecipe: (recipe)=>{
-    console.log("Cadastrou a receita!!!!!!!!!!")
+    console.log("Cadastrou a receita!!!!!!!!!!\n"+recipe)
   },
   createRecipe: (recipe) =>{
     console.log(recipe)
+    axios.post(serviceBusURL,{
+      type: 'createdRecipe',
+      data: recipe
+    })
     // recipe.save().then(document =>{
     //   axios.post(serviceBusURL,{
     //     type: 'createdRecipe',
@@ -62,7 +66,7 @@ app.post("/MaoNaMassa", (req, res, next) => {
   try{
     functions[req.body.type](req.body.data)
   }catch(err){
-
+    console.log("A função " + req.body.type +" não é daqui")
   }
   res.send({msg:ok}).status(201)
   // Recipe.save().then((addRecipe) => {
@@ -73,23 +77,23 @@ app.post("/MaoNaMassa", (req, res, next) => {
   // });
 });
 
-app.get("/MaoNaMassa", (req, res, next) => {
-  try{
-    functions[req.body.type](req.body.data)
-  }catch(err){
+// app.get("/MaoNaMassa", (req, res, next) => {
+//   try{
+//     functions[req.body.type](req.body.data)
+//   }catch(err){
+//     console.log("A função " + req.body.type +" não é daqui")
+//   }
+//   res.send({msg:ok}).status(201)
+// });
 
-  }
-  res.send({msg:ok}).status(201)
-});
+// app.delete("/MaoNaMassa/:id", (req, res, next) => {
+//   try{
+//     functions[req.body.type](req.body.data)
+//   }catch(err){
 
-app.delete("/MaoNaMassa/:id", (req, res, next) => {
-  try{
-    functions[req.body.type](req.body.data)
-  }catch(err){
-
-  }
-  res.send({msg:ok}).status(201)
-});
+//   }
+//   res.send({msg:ok}).status(201)
+// });
 
 app.listen(4000,async()=>{
   

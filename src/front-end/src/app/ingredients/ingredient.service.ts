@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Ingredient } from './ingredient.model';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -9,13 +10,18 @@ import {Router} from '@angular/router';
 export class IngredientService {
   private ingredients: Ingredient[] = [];
   private updatedIngredientsList = new Subject<Ingredient[]>();
+  private urlIngredient = "http://localhost:5000/MaoNaMassa";
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(
+    @Inject(DOCUMENT) private _document: Document,
+    private httpClient: HttpClient,
+    private router: Router
+  ) {}
 
   getIngredients(): void {
     this.httpClient
       .get<{ message: string; ingredients: any }>(
-        'http://localhost:3000/maoNaMassa'
+        this.urlIngredient
       )
       .pipe(
         map((data) => {
@@ -44,8 +50,8 @@ export class IngredientService {
 
   addIngredient(ingredient: Ingredient) {
     this.httpClient
-      .post<{ message: string; id: string }>(
-        'http://localhost:3000/maoNaMassa',
+      .put<{ message: string; id: string }>(
+        this.urlIngredient,
         ingredient
       )
       .subscribe((data) => {
@@ -58,34 +64,24 @@ export class IngredientService {
 
   deleteIngredient(id: string): void {
     this.httpClient
-      .delete(`http://localhost:3000/maoNaMassa/:${id}`)
+      .delete(this.urlIngredient+`/${id}`)
       .subscribe(() => {
         this.ingredients = this.ingredients.filter((ingre) => {
           return ingre.id !== id;
         });
+        this._document.defaultView.location.reload();
       });
   }
 
   getIngredient(idIngredient: any) {
     return this.httpClient.get<{
-      _id: string;
-      ingredient: string;
-      quantity: number;
-      measurement: string;
-      measurementUnit: string;
-      expirationDate: string;
-      price: number;
-    }>(`http://localhost:3000/maoNaMassa/${idIngredient}`);
+      message: string,  ingredients: Ingredient
+    }>(this.urlIngredient+`/${idIngredient}`);
   }
 
-  updateIngredient(id: string, ingredient: string,
-    quantity: number,
-    measurement: string,
-    measurementUnit: string,
-    expirationDate: string,
-    price: number) {
-    const i: Ingredient = {id, ingredient, quantity, measurement, measurementUnit, expirationDate, price}
-    this.httpClient.put(`http://localhost:3000/maoNaPassa/${id}`, i).subscribe((res)=>{
+  updateIngredient(ingredient: Ingredient) {
+    const i: Ingredient = ingredient;
+    this.httpClient.put(this.urlIngredient+`/${i.id}`, i).subscribe((res)=>{
       const copia = [...this.ingredients]
       const indice = copia.findIndex(ingre => ingre.id === i.id)
       copia[indice] = i;
