@@ -1,0 +1,16 @@
+<mat-accordion *ngFor='let itemsProduced of itemsProduced'>
+    <mat-expansion-panel >
+      <mat-expansion-panel-header >
+        <span>{{itemsProduced.id}}</span><span>{{itemsProduced.quantity | currency:'Produzidos: '}}</span>  <span>Data de Produção: {{itemsProduced.productionDate}}</span>
+      </mat-expansion-panel-header>
+      <p>Data de Validade: {{itemsProduced.expirationDate}}</p>
+      <p>Valor Gasto: {{itemsProduced.costValue| currency:'R$' }}</p>
+      <p>Valor Final: {{itemsProduced.totalValue | currency:'R$' }}</p>
+
+      <mat-action-row>
+        <button mat-raised-button class="btn btn-primary" >Editar</button>
+        <button mat-raised-button class="btn btn-danger"  >Remover</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <p *ngIf='itemsProduced.length <= 0'>Sem itens Produzidos disponíveis</p>

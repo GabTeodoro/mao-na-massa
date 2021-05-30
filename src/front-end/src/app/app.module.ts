@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AddIngredientsComponent } from './ingredients/add-ingredients/add-ingredients.component';
 import { ListIngredientsComponent } from './ingredients/list-ingredients/list-ingredients.component';
+import { AddItemsProducedComponent } from './itemsProduced/add-items-produced/add-items-produced.component';
+import { ListItemsProducedComponent } from './itemsProduced/list-itemsProduced/list-itemsProduced.component';
 
 import { IngredientService } from './ingredients/ingredient.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +30,8 @@ import { RecipeService } from './recipes/recipe.service';
     ListIngredientsComponent,
     AddRecipeComponent,
     ListRecipesComponent,
+    AddItemsProducedComponent,
+    ListItemsProducedComponent
   ],
   imports: [
     BrowserModule,

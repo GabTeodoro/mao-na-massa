@@ -9,12 +9,17 @@ import { ListIngredientsComponent } from './ingredients/list-ingredients/list-in
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { ListRecipesComponent } from './recipes/list-recipes/list-recipes.component';
 
+import { AddItemsProducedComponent } from './itemsProduced/add-items-produced/add-items-produced.component';
+import { ListItemsProducedComponent } from './itemsProduced/list-itemsProduced/list-itemsProduced.component';
+
 const routes: Routes = [
   //{ path: '', component:  } //home
   { path: 'add/ingredient', component: AddIngredientsComponent },
   { path: 'list/ingredients', component: ListIngredientsComponent },
   { path: 'add/recipe', component: AddRecipeComponent },
   { path: 'list/recipes', component: ListRecipesComponent },
+  { path: 'add/items-produced', component: AddItemsProducedComponent },
+  { path: 'list/items-produced', component: ListItemsProducedComponent },
 ];
 
 @NgModule({
