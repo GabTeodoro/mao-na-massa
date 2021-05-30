@@ -4,17 +4,21 @@ const app = express();
 app.use(express.json());
 let events = []
 
-app.post('/MaoNaMassa',(req,res)=>{
+app.post('/MaoNaMassa',(req)=>{
     const event = req.body;
-    const retorno = event.retorno;
-    console.log(retorno);
     events.push(event);
-    console.log("Enviando evento \n" + event.type)
+    console.log("Enviando evento " + event.type)
     // Ingrediente  
-    axios.post('http://localhost:5000/MaoNaMassa',event);
+    axios.post('http://localhost:5000/MaoNaMassa',event).catch(()=>console.log("Não enviou para o ingrediente"));
 
     //Receita
-    axios.post('http://localhost:4000/MaoNaMassa',event);
+    axios.post('http://localhost:4000/MaoNaMassa',event).catch(()=>console.log("Não enviou para a receita"));;
+
+    //Itens produzidps
+    axios.post('http://localhost:7000/MaoNaMassa',event).catch(()=>console.log("Não enviou para os itens produzidos"));;
+
+    //Notificações
+    axios.post('http://localhost:8000/MaoNaMassa',event).catch(()=>console.log("Não enviou para a notificação"));;
 })
 
 app.get('/MaoNaMassa',(req, res)=>{
@@ -23,4 +27,3 @@ app.get('/MaoNaMassa',(req, res)=>{
 
 module.exports = app
 
-// app.listen(10000,()=>console.log("Barramento de eventos: Porta 10000"))

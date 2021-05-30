@@ -72,8 +72,7 @@ app.put("/MaoNaMassa/:id", (req,res)=>{
 
 app.delete("/MaoNaMassa/:id",(req, res)=>{
   try{    
-    const id = ObjectId.isValid(ObjectId("60ad69e18fcd2244e49f69b4"))
-    Ingredient.deleteOne({ _id: req.params.id }).then((result) => {
+    Ingredient.deleteOne({ _id: req.params.id }).then(() => {
       res.status(200).json({ message: "Deleted ingredient" });
     }).catch((err)=>console.log("Deu erro deletando.\nErro:"+err));
   }catch(erro){
@@ -90,6 +89,7 @@ app.post("/MaoNaMassa", (req, res)=>{
   }
   res.status(200).send({msg:"ok"})
 })
+
 app.get("/MaoNaMassa", (req, res)=>{
   Ingredient.find().then((documents) => {
     allIngredients = documents;
@@ -105,9 +105,8 @@ app.listen(5000,async ()=>{
 
   const ret = await axios.get(serviceBusURL)
 
-  ret.data.forEach((value, index)=>{
+  ret.data.forEach((value)=>{
     try{
-      console.log(value.type)
       functions[value.type](value.data)
     }catch(err){}
   })

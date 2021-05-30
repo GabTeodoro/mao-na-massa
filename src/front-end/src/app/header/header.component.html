@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light soft-yellow mb-3">
+<nav class="navbar d-block navbar-expand-lg navbar-light soft-yellow">
   <div class="container-fluid w-80">
     <a class="navbar-brand" tabindex="-1" href="/">Mão na Massa</a>
 
@@ -39,29 +39,6 @@
           <a
             class="nav-link dropdown-toggle"
             href="#"
-            id="navbarIngredientes"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            tabindex="-1"
-          >
-            Ingredientes
-          </a>
-          <div class="dropdown-menu slide-out" aria-labelledby="navbarIngredientes">
-            <a class="dropdown-item" href="/add/ingredient"
-              >Cadastrar ingredientes</a
-            >
-            <a class="dropdown-item" href="/list/ingredients"
-              >Ver ingredientes</a
-            >
-          </div>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
             id="navbarItemsProduced"
             role="button"
             data-toggle="dropdown"
@@ -80,6 +57,46 @@
             >
           </div>
         </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarReceitas"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            tabindex="-1"
+          >
+            Ingredientes
+          </a>
+          <div class="dropdown-menu slide-out" aria-labelledby="navbarReceitas">
+            <a class="dropdown-item" href="/add/ingredient">Cadastrar Ingrediente</a>
+            <a class="dropdown-item" href="/list/ingredients">Minhas Ingredientes</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle font-0"
+          href="#"
+          id="navbarNotificacoes"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          (blur)="onBlur()"
+          tabindex="-1">
+          <img class="d-block bell-notification" src="assets/svg/bell.svg" alt="Notificações" />
+          <div [ngClass]="{'has-notification': verif,'no-notification':!verif}"></div>
+        </a>
+          <div class="dropdown-menu slide-out nav-notification-width" aria-labelledby="navbarNotificacoes">
+            <a *ngFor="let notification of notifications" href="#" class="dropdown-item ">
+              <span class="d-inline-block notification-text text-wrap">{{notification.message}}</span>
+              <div class="flex-1"></div>
+              <span class="notification-date">{{notification.date}}</span>
+            </a>
+          </div>
+        </li>
+
       </ul>
 
       <div class="d-flex flex-lg-fill"></div>
@@ -94,7 +111,7 @@
           />
           <div class="input-group-append">
             <span for='search' class=" input-group-text soft-yellow" id="basic-addon1">
-            <a class='h' href="#" id='search' >
+            <a class='font-0' href="#" id='search' >
               <img src="assets/svg/search24px.svg" alt="Pesquisar" />
             </a>
             </span>

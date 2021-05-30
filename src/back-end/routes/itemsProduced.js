@@ -19,6 +19,10 @@ const databaseDB = process.env.MONGODB_ITEMSPRODUCED_DATABASE;
 const serviceBusURL = 'http://localhost:3000/MaoNaMassa';
 const ObjectId = require('mongodb').ObjectID;
 
+const functions = {
+
+}
+
 mongoose
   .connect(`mongodb+srv://${userDB}:${passwordDB}@${clusterDB}/${databaseDB}?retryWrites=true&w=majority`,{useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => {
@@ -84,6 +88,23 @@ app.delete("/MaoNaMassa/:id", (req, res, next) => {
   }).catch((err)=>console.log("Erro deletando.\nErro: "+err));
 });
 
+app.post("/MaoNaMassa", (req, res, next) => {
+  
+  try{
+    functions[req.body.type](req.body.data)
+  }catch(err){
+  }
+  res.send({msg:'ok'}).status(201)
+
+});
+
 app.listen(7000,async ()=>{
     console.log("Itens produzidos: Porta 7000")
+  const ret = await axios.get(serviceBusURL)
+
+  ret.data.forEach((value, index)=>{
+    try{
+      functions[value.type](value.data)
+    }catch(err){}
+  })
 })

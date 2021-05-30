@@ -50,7 +50,6 @@ app.put('/MaoNaMassa/:id',(req, res)=>{
     finalPrice: req.body.finalPrice,
     name: req.body.name
   }
-  // console.log(recipe)
   Recipe.updateOne({ _id: req.params.id},recipe).then(()=>res.status(201).send({message:"Atualizou!!"})).catch((err)=>console.log("Erro salvando.\nErro: "+err));
 })
 
@@ -80,35 +79,11 @@ app.post("/MaoNaMassa", (req, res, next) => {
   
   try{
     functions[req.body.type](req.body.data)
-  }catch(err){
-    console.log("A função " + req.body.type +" não é daqui")
-  }
+    console.log(req.body.type)
+  }catch(err){}
   res.send({msg:'ok'}).status(201)
-  // Recipe.save().then((addRecipe) => {
-  //   res.status(201).json({
-  //     message: "Added Recipe",
-  //     id: addRecipe.id
-  //   });
-  // });
+
 });
-
-// app.get("/MaoNaMassa", (req, res, next) => {
-//   try{
-//     functions[req.body.type](req.body.data)
-//   }catch(err){
-//     console.log("A função " + req.body.type +" não é daqui")
-//   }
-//   res.send({msg:ok}).status(201)
-// });
-
-// app.delete("/MaoNaMassa/:id", (req, res, next) => {
-//   try{
-//     functions[req.body.type](req.body.data)
-//   }catch(err){
-
-//   }
-//   res.send({msg:ok}).status(201)
-// });
 
 app.listen(4000,async()=>{
   
@@ -118,7 +93,6 @@ app.listen(4000,async()=>{
 
   ret.data.forEach((value, index)=>{
     try{
-      console.log(value.type)
       functions[value.type](value.data)
     }catch(err){
 
