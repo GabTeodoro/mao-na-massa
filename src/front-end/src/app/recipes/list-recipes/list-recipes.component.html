@@ -1,3 +1,5 @@
+<h2 class="my-3">Suas Receitas</h2>
+
 <mat-accordion *ngFor='let recipe of recipes'>
   <mat-expansion-panel >
     <mat-expansion-panel-header >
@@ -8,13 +10,13 @@
     <div *ngIf='recipe.lines.length > 0' >
     <p>Ingredientes:</p>
       <ul *ngFor='let linha of recipe.lines' >
-        <li class='teste'>Id: {{linha.id}} | Qtde: {{linha.quantityIngredient}} | total: {{linha.total}}</li>
+        <li class='teste'>{{linha.ingredient}} | Qtde: {{linha.quantity}} | total: {{linha.price}}</li>
       </ul>
     </div>
 
     <mat-action-row>
-      <button mat-raised-button class="btn btn-primary" >Editar</button>
-      <button mat-raised-button class="btn btn-danger"  >Remover</button>
+      <button mat-raised-button (click)="onEditRecipe(recipe.id)"  class="btn btn-primary" >Editar</button>
+      <button mat-raised-button (click)="onRemoveRecipe(recipe.id)" class="btn btn-danger">Remover</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

@@ -7,7 +7,7 @@ ul {
 }
 mat-expansion-panel{
   padding: 5px 0;
-
+  margin-bottom: 0.60rem;
   box-shadow: 2px 2px 5px 1px #ccc;
 }
 

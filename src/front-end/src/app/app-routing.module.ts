@@ -10,11 +10,8 @@ import { ListIngredientsComponent } from './ingredients/list-ingredients/list-in
 import { AddRecipeComponent } from './recipes/add-recipe/add-recipe.component';
 import { ListRecipesComponent } from './recipes/list-recipes/list-recipes.component';
 
-
-// Items Produced
-// import { AddItemsProducedComponent } from './itemsProduced/add-itemsProduced/;
-import { ListItemsProducedComponent } from './itemsProduced/list-itemsProduced/list-itemsProduced.component';
 import { AddItemsProducedComponent } from './itemsProduced/add-items-produced/add-items-produced.component';
+import { ListItemsProducedComponent } from './itemsProduced/list-itemsProduced/list-itemsProduced.component';
 
 const routes: Routes = [
   { path: '', component:  HomeComponent},
@@ -27,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: "reload"})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

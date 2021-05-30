@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 import { notification } from './notification.model';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({providedIn: 'root'})
 export class NotificationService {
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   private notifications: notification[] = [];
   private updatedNotificationList = new Subject<notification[]>();
+  private urlNotification = 'http://localhost:8000/MaoNaMassa'
 
-  getNotification():void{
-    const data = new Date()
-    const retorno:notification[] = [{
-      id: '123',
-      message: "O ingrediente {Insira seu ingrediente aqui} está em falta.",
-      date: data.toISOString(),
-      type: '123'
-    }]
-
-    this.notifications = retorno;
-    this.updatedNotificationList.next([...this.notifications])
-
-    console.log("está chamando o getNotification()\n" +JSON.stringify(this.notifications))
+  getNotification(){
+    this.httpClient
+    .get<{message: string, notifications: notification[]}>(this.urlNotification)
+    .subscribe((notif)=>{
+      this. notifications = notif.notifications;
+      this.updatedNotificationList.next([...this.notifications])
+    })
   }
-  deleteNotification():void{
-    console.log("Está deletando as notificações")
+
+  deleteNotification(){
+    console.log("tentando deletar")
+    this.httpClient.delete<{message:string}>(this.urlNotification).subscribe(()=>{
+      this.notifications = [];
+      this.updatedNotificationList.next([])
+    })
   }
 
   getUpdatedNotificationList(){
     console.log("está chamando  o getUpdatedNotificationList()")
-    
     return this.updatedNotificationList.asObservable();
   }
 

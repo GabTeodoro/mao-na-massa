@@ -83,6 +83,7 @@
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
+          (blur)="onBlur()"
           tabindex="-1">
           <img class="d-block bell-notification" src="assets/svg/bell.svg" alt="Notificações" />
           <div [ngClass]="{'has-notification': verif,'no-notification':!verif}"></div>

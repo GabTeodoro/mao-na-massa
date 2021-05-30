@@ -17,16 +17,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   verif: boolean;
 
   ngOnInit(): void {
-    console.log("ngOnInit()")
     this.notificationService.getNotification();
     this.notificationSubscription =
       this.notificationService
         .getUpdatedNotificationList()
         .subscribe((notifications: notification[])=>{
-          console.log("Dentro do subscribe")
           this.notifications = notifications
           this.verif = this.notifications.length > 0;
       })
+  }
+  onBlur(){
+    if(this.verif){
+      this.notifications = []
+      this.notificationService.deleteNotification();
+      this.verif = this.notifications.length > 0;
+    }
   }
 
   ngOnDestroy(): void {
