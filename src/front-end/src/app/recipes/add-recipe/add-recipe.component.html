@@ -1,53 +1,61 @@
 <h2>Cadastro de Receitas</h2>
-<form (submit)='onAddRecipe(recipeForm)' #recipeForm="ngForm" >
+<form [formGroup]="recipeForm2" (submit)='onAddRecipe(recipeForm2)'>
   <div class="form-group row">
-    <div class="col-12">
-      <label for="">Nome </label>
-      <input type="text" class="form-control" name='name' ngModel #name="ngModel" />
+    <div class="col-6">
+      <label for="">Nome:</label>
+      <input type="text" class="form-control" name='name' formControlName="name"/>
+    </div>
+    <div class="col-4">
+      <label for="">Data de produção:</label>
+      <input type="date" formControlName="productionDate" class="form-control"/>
     </div>
   </div>
-  <div class="form-group row">
-    <div class="col-12">
-      <label>Ingredientes </label>
-      <button type="button" class="btn btn-round btn-success" name="add" (click)="add()">+</button>
-      <button type="button" class="btn btn-round btn-danger" name="delete" (click)="delete()">-</button>
+  <hr>
+  <div class="form-group row" formArrayName="recipeRows">
+    <div *ngFor="let recipeRow of recipeRows.controls; let i=index" [formGroupName]="i" class="col-12">
+      <label>Ingrediente #{{ i + 1 }} </label>
+      <button type="button" class="btn btn-round btn-success" name="add" (click)="addNewIngredient()">+</button>
+      <button type="button" class="btn btn-round btn-danger" name="delete" (click)="deleteIngredient(i)" *ngIf="recipeRows.controls.length > 1">-</button>
       <div class="table">
         <table>
           <thead>
             <tr>
               <th scope="col">Ingrediente</th>
               <th scope="col">Quantidade</th>
+              <th scope="col">Preço Unidade</th>
               <th scope="col">Medida por Unidade</th>
               <th scope="col">Data de Validade</th>
-              <th scope="col">Preço</th>
+              <th scope="col">Custo de Uso</th>
             </tr>
           </thead>
           <tbody >
             <th scope="row">
-              <input type="text" name="ingredient" class="form-control" id='ingredient' ngModel #ingredient="ngModel" />
+              <select formControlName="ingredient" class="form-control"  #iSelect (change)="getIngredientsInfo(i, iSelect.value)">
+                <option *ngFor='let ingredient of ingredients' [value]="ingredient.id">{{ ingredient.ingredient }}</option>
+              </select>
             </th>
             <th>
-              <input type="number" name="quantity" class="form-control" min="0" step="1" ngModel #quantity="ngModel" />
+              <input type="" formControlName="quantity" class="form-control" disabled/>
             </th>
+            <th><input type="number" formControlName="unitPrice" class="form-control" disabled/></th>
             <th>
               <div class="input-group">
                 <input
                   id="measurement"
                   type="number"
-                  name="measurement"
+                  formControlName="measurement"
                   class="form-control"
                   placeholder="Unidade"
                   aria-label="City"
-                  ngModel
-                  #measurement="ngModel"
+                  min="1"
+                  step="0.25"
+                  (input)="calculateValue(i)"
                 />
                 <div class="input-group-append">
                   <select
                     class="form-control"
-                    name="measurementUnit"
+                    formControlName="measurementUnit"
                     id="measurementUnit"
-                    ngModel
-                    #measurementUnit="ngModel"
                   >
                     <option selected value="Kg">Kg</option>
                     <option value="g">g</option>
@@ -60,57 +68,33 @@
                 </div>
               </div>
             </th>
-            <th><input type="date" name="expirationDate" class="form-control"  ngModel #expirationDate="ngModel"/></th>
-            <th><input type="number" name="price" class="form-control" ngModel #price="ngModel" /></th>
+            <th><input type="date" formControlName="expirationDate" class="form-control" disabled/></th>
+            <th><input type="number" formControlName="price" class="form-control"/></th>
           </tbody>
         </table>
       </div>
     </div>
   </div>
+  <hr>
   <div class="form-group row">
-    <div class="col-12">
-      <label for="">Preço mínimo</label>
-      <input type="number" name="minimumValue" class="form-control" ngModel #minimumPrice="ngModel" />
+    <div class="col-3">
+      <label for="">Preço mínimo:</label>
+      <input type="number" formControlName="minimumValue" class="form-control" disabled/>
+    </div>
+    <div class="col-2">
+      <label for="">Porcentagem de lucro:</label>
+      <input type="number" formControlName="profitPercentage" min="10" max="100" class="form-control" (input)="setPriceByPercent()"/>
+    </div>
+    <div class="col-3">
+      <label for="">Sujestão de preço:</label>
+      <input type="number" formControlName="priceSuggestion" class="form-control" disabled/>
+    </div>
+    <div class="col-3">
+      <label for="">Preço final:</label>
+      <input type="number" formControlName="finalPrice" step="0.1" [min]="" class="form-control"/>
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-12">
-      <label for="">Sujestão de preço</label>
-      <input type="number" name="priceSuggestion" class="form-control" ngModel #priceSuggestion="ngModel" />
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-12">
-      <label for="">Data de produção</label>
-      <input type="date" name="productionDate" class="form-control" ngModel #productionDate="ngModel" />
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-12">
-      <label for="">Porcentagem de lucro</label>
-      <div style="flex: 1"></div>
-      <mat-slider
-        thumbLabel
-        [displayWith]="formatLabel"
-        tickInterval="25"
-        value="50"
-        step="1"
-        min="0"
-        max="100"
-        aria-label="units"
-        name="profitPercentage"
-        ngModel
-        #profitPercentage="ngModel"
-      ></mat-slider>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-12">
-      <label for="">Preço final</label>
-      <input type="number" name="finalPrice" step="0.1" [min]="" class="form-control" ngModel #finalPrice="ngModel" />
-    </div>
-  </div>
-  <div class="form-group row">
-    <button type="submit" name="submit" class='btn btn-primary' >Enviar</button>
+    <button type="submit" name="submit" class='btn btn-primary'>Enviar</button>
   </div>
 </form>

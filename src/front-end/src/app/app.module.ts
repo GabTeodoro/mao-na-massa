@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatCardModule} from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 import { AppComponent } from './app.component';
@@ -23,17 +25,20 @@ import { ListRecipesComponent } from './recipes/list-recipes/list-recipes.compon
 import { RecipeService } from './recipes/recipe.service';
 import { itemsProducedService } from './itemsProduced/itemsProduced.service';
 import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    HomeComponent,
     AddIngredientsComponent,
     ListIngredientsComponent,
     AddRecipeComponent,
     ListRecipesComponent,
     AddItemsProducedComponent,
-    ListItemsProducedComponent
+    ListItemsProducedComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +47,11 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     MatExpansionModule,
     MatButtonModule,
+    MatCardModule,
     MatSliderModule,
-    BrowserAnimationsModule
+    MatToolbarModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [IngredientService,RecipeService,itemsProducedService],
   bootstrap: [AppComponent],

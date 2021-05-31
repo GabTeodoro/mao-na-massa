@@ -8,58 +8,91 @@
   <p>Sinta-se à vontade para ver e criar as melhores receitas para você!</p>
   <p class="lead"></p>
 </div>
-<h2 class="h2 my-4" >Receitas:</h2>
+<mat-toolbar color="primary">
+  Suas Receitas:
+</mat-toolbar>
+<!-- <h2 class="h2 my-4" >Receitas:</h2> -->
 <div class="d-flex flex-row justify-content-center w-100 py-3">
   <div class="row">
     <div class="col-12 col-lg-4 mb-5 mb-lg-0 mt-2 mt-lg-0">
-      <div class="card mx-auto" >
-        <a class="btn" href="#" role="button"
-          >
-          <img
-            class="card-img"
-            src="assets/img/Bolo.jpg"
-            alt="Imagem de capa do card"
-          />
-        </a>
-        <div class="card-body mx-auto">
-          <h5 class="card-title">Bolo de Cenoura</h5>
-          <p class="card-text">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde ullam cum hic alias odio sunt?
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Seu Livro de Receita</mat-card-title>
+        </mat-card-header>
+        <hr>
+        <img mat-card-image src="../../assets/svg/livro-de-receitas.svg">
+        <mat-card-content>
+          <p>
+            Controle sua receita por aqui!
           </p>
-        </div>
-      </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-button href="/add/recipe">Adicionar</a>
+          <a mat-button href="/list/recipes">Ver Receitas</a>
+        </mat-card-actions>
+      </mat-card>
     </div>
-    <div class="col-12 col-lg-4 mb-5 mb-lg-0">
-      <div class="card">
-        <a class="btn" href="#" role="button"
-          ><img
-            class="card-img"
-            src="assets/img/Hamburguer.jpg"
-            alt="Imagem de capa do card"
-        /></a>
-        <div class="card-body mx-auto">
-          <h5 class="card-title">Hamburguer</h5>
-          <p class="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem alias ipsa ipsam.
+    <div *ngFor='let recipe of recipes' class="col-12 col-lg-4 mb-5 mb-lg-0 mt-2 mt-lg-0">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ recipe.name }}</mat-card-title>
+        </mat-card-header>
+        <hr>
+        <img mat-card-image src="../../assets/svg/receita.svg">
+        <mat-card-content>
+          <p>
+            Descrição das receitas
           </p>
-        </div>
-      </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-button>Editar</a>
+          <a mat-button>Remover</a>
+        </mat-card-actions>
+      </mat-card>
     </div>
-    <div class="col-12 col-lg-4 mb-5 mb-lg-0">
-      <div class="card ">
-        <a class="btn" href="#" role="button"
-          ><img
-            class="card-img"
-            src="assets/img/Nacho.jpg"
-            alt="Imagem de capa do card"
-        /></a>
-        <div class="card-body mx-auto">
-          <h5 class="card-title">Nachos</h5>
-          <p class="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus odio sunt maiores. Ipsum, error.
+  </div>
+</div>
+
+<mat-toolbar color="primary">
+  Seu Estoque:
+</mat-toolbar>
+<div class="d-flex flex-row justify-content-center w-100 py-3">
+  <div class="row">
+    <div class="col-12 col-lg-4 mb-5 mb-lg-0 mt-2 mt-lg-0">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Armazem</mat-card-title>
+        </mat-card-header>
+        <hr>
+        <img mat-card-image src="../../assets/svg/ingredientes.svg">
+        <mat-card-content>
+          <p class="mb-0 pt-0">
+           Controle seu esqueto por aqui!
           </p>
-        </div>
-      </div>
+          <p class="mt-0 pt-0"></p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-button href="/add/ingredient">Adicionar</a>
+          <a mat-button href="/list/ingredients">Ver Estoque</a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div *ngFor='let ingredient of ingredients' class="col-12 col-lg-4 mb-5 mb-lg-0 mt-2 mt-lg-0">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ ingredient.ingredient }}</mat-card-title>
+        </mat-card-header>
+        <hr>
+        <img mat-card-image src="../../assets/svg/ingrediente.svg">
+        <mat-card-content>
+          <p class="mb-0 pt-0"><strong>Preço Unitário: </strong> {{ ingredient.price | currency:'R$' }}</p>
+          <p class="mt-0 pt-0"><strong>Quantidade: </strong> {{ ingredient.quantity }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Editar</button>
+          <button mat-button>Remover</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>
