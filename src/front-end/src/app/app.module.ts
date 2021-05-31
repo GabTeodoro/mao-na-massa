@@ -7,6 +7,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatCardModule} from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 import { AppComponent } from './app.component';
@@ -28,6 +30,7 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     HeaderComponent,
+    HomeComponent,
     AddIngredientsComponent,
     ListIngredientsComponent,
     AddRecipeComponent,
@@ -42,7 +45,9 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     MatExpansionModule,
     MatButtonModule,
+    MatCardModule,
     MatSliderModule,
+    MatToolbarModule,
     BrowserAnimationsModule
   ],
   providers: [IngredientService,RecipeService,itemsProducedService],

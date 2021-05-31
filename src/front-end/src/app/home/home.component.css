@@ -23,3 +23,15 @@ img {
 .card {
   border: 0;
 }
+
+.content {
+  padding: 24px;
+}
+
+mat-card {
+  width: 350px;
+}
+header-image {
+  background-image: url('../../assets/svg/livro-de-receitas.svg');
+  /* background-size: cover; */
+}
