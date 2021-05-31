@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Ingredient } from '../ingredients/ingredient.model';
 import { Recipe } from './recipe.model';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,17 +9,50 @@ import { Router } from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class RecipeService {
+  private recipes: Recipe[] = [];
+  private ingredients: Ingredient[] = [];
+
+  private updatedRecipesList = new Subject<Recipe[]>();
+  private updatedIngredientsList = new Subject<Ingredient[]>();
+
+  private recipeUrl = 'http://localhost:4000/MaoNaMassa';
+  private urlIngredient = "http://localhost:5000/MaoNaMassa";
+
   constructor(
     @Inject(DOCUMENT) private _document: Document,
     private httpClient: HttpClient,
     private router: Router
   ) { }
 
-  private recipes: Recipe[] = [];
-  private updatedRecipesList = new Subject<Recipe[]>();
-  private recipeUrl = 'http://localhost:4000/MaoNaMassa';
-
   ngOnInit(): void {}
+
+  getIngredients(): void {
+    this.httpClient
+    .get<{ message: string; ingredients: any }>(
+        this.urlIngredient
+    )
+    .pipe(map((data) => {
+        return data.ingredients.map((ingredients) => {
+            return {
+              id: ingredients._id,
+              ingredient: ingredients.ingredient,
+              quantity: ingredients.quantity,
+              measurement: ingredients.measurement,
+              measurementUnit: ingredients.measurementUnit,
+              expirationDate: ingredients.expirationDate,
+              price: ingredients.price,
+            };
+        });
+    }))
+    .subscribe((ingredients) => {
+        this.ingredients = ingredients;
+        this.updatedIngredientsList.next([...this.ingredients]);
+    });
+  }
+
+  getUpdatedIngredientsListObservable() {
+    return this.updatedIngredientsList.asObservable();
+  }
 
   getRecipe(id: string) {
     return this.httpClient
@@ -72,8 +106,6 @@ export class RecipeService {
     })
     this.router.navigate(['/'])
   }
-
-
 
   editRecipe(recipe: Recipe) {
     const r: Recipe = recipe;

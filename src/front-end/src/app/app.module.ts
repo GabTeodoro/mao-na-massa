@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -48,7 +48,8 @@ import { HomeComponent } from './home/home.component';
     MatCardModule,
     MatSliderModule,
     MatToolbarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [IngredientService,RecipeService,itemsProducedService],
   bootstrap: [AppComponent],
