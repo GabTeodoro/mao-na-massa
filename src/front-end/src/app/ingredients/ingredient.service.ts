@@ -43,6 +43,13 @@ export class IngredientService {
       });
   }
 
+  getIngredientsNumber(){
+    this.httpClient
+      .get<{ message: string; ingredients: any }>(
+        this.urlIngredient
+      )
+  }
+
   getUpdatedIngredientsListObservable() {
     return this.updatedIngredientsList.asObservable();
   }

@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.verif = this.notifications.length > 0;
       })
   }
+
   onBlur(){
     if(this.verif){
       this.notifications = []
@@ -37,5 +38,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.notificationSubscription.unsubscribe();
   }
-
 }
