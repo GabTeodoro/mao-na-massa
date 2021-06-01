@@ -6,3 +6,9 @@ div.w-100{
   height: calc(100vh - 3.688rem);
   overflow-y: scroll;
 }
+main{
+  min-height: calc(100vh - 9.5rem - 3.688rem);
+}
+app-footer{
+  position: sticky;
+}
