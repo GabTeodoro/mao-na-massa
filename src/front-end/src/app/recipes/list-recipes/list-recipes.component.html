@@ -10,7 +10,7 @@
     <div *ngIf='recipe.lines.length > 0' >
     <p>Ingredientes:</p>
       <ul *ngFor='let linha of recipe.lines' >
-        <li class='teste'>{{linha.ingredient}} | Qtde: {{linha.quantity}} | total: {{linha.price}}</li>
+        <li class='teste'>{{linha.ingredient}} | Qtde: {{linha.quantity}} | {{linha.price | currency:'R$'}}</li>
       </ul>
     </div>
 

@@ -22,7 +22,7 @@ export class AddRecipeComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
     public recipeService: RecipeService,
-    public route: ActivatedRoute) { 
+    public route: ActivatedRoute) {
       this.createForm();
     }
 
@@ -39,11 +39,11 @@ export class AddRecipeComponent implements OnInit {
 
   onAddRecipe(form: FormGroup){
     let ingredients: Ingredient[] = [];
-
+    // console.log(this.recipeRows.value)
     for (let index = 0; index < this.recipeRows.length; index++) {
-      let ing = {
-        id: null,
-        ingredient: this.recipeRows.value[index].ingredient,
+      let ing: Ingredient = {
+        id: this.recipeRows.value[index].id,
+        ingredient: this.recipeRows.value[index].ingredient.split(";")[1],
         quantity: this.recipeRows.value[index].quantity,
         measurement: this.recipeRows.value[index].measurement,
         measurementUnit: this.recipeRows.value[index].measurementUnit,
@@ -52,7 +52,6 @@ export class AddRecipeComponent implements OnInit {
       }
       ingredients.push(ing);
     }
-
     const recipe:Recipe = {
       id: null,
       name: form.value.name,
@@ -66,12 +65,13 @@ export class AddRecipeComponent implements OnInit {
     this.recipeService.addRecipe(recipe)
   }
 
-  onAddRecipe2(recipeForm2: FormGroup) {
-    console.log(recipeForm2.value);
-  }
-  
+  // onAddRecipe2(recipeForm2: FormGroup) {
+  //   console.log(recipeForm2.value);
+  // }
+
   initRecipeRows() {
     return this._formBuilder.group({
+      id: [''],
       ingredient: [''],
       quantity: [''],
       measurement: [''],
@@ -104,27 +104,29 @@ export class AddRecipeComponent implements OnInit {
     for (let index = 0; index < this.recipeRows.length; index++) {
       minValue += Number.parseFloat(this.recipeRows.value[index].price);
     }
-    console.log(minValue);
+    // console.log(minValue);
 
     this.recipeForm2.controls['minimumValue'].patchValue(minValue);
   }
 
   setPriceByPercent() {
     const minPrice = this.recipeForm2.value.minimumValue;
-    console.log(minPrice);
+    // console.log(minPrice);
     const percent = this.recipeForm2.value.profitPercentage / 100;
-    console.log(percent);
+    // console.log(percent);
 
     this.recipeForm2.controls['priceSuggestion'].patchValue((minPrice + (minPrice * percent)));
     this.recipeForm2.controls['finalPrice'].patchValue((minPrice + (minPrice * percent)));
   }
 
   getIngredientsInfo(index: number, id: string) {
-    let ingredient = this.ingredients.find(i => i.id === id)
+    const retIdAndName = id.split(";")
+    let ingredient = this.ingredients.find(i => i.id === retIdAndName[0])
     let recipeRow = this.recipeRows.value[index];
-    console.log(ingredient);
-    console.log(recipeRow);
+    // console.log(ingredient);
     this.recipeRows.controls[index].patchValue({
+      id: ingredient.id,
+      ingredient: id,
       quantity: ingredient.quantity,
       measurement: [''],
       measurementUnit: [''],
@@ -141,7 +143,7 @@ export class AddRecipeComponent implements OnInit {
     .subscribe((ingredients: Ingredient[]) => {
       this.ingredients = ingredients;
     });
-    this.recipeForm2 = this.recipeForm2 = this._formBuilder.group({
+    this.recipeForm2 = this._formBuilder.group({
       name: [''],
       minimumValue: [''],
       priceSuggestion: [''],
