@@ -82,12 +82,14 @@ app.post("/MaoNaMassa", (req, res, next) => {
 
 app.listen(8000, async () => {
   console.log("Notificações: Porta 8000")
-  const ret = await axios.get(serviceBusURL)
-  axios.post('http://localhost:3000/MaoNaMassa', data)
-    .catch((err) => {})
-  ret.data.forEach((value, index) => {
-    try {
-      functions[value.type](value.data)
-    } catch (err) { }
-  })
+  try{
+    const ret = await axios.get(serviceBusURL)
+    axios.post('http://localhost:3000/MaoNaMassa', data)
+      .catch((err) => {})
+    ret.data.forEach((value, index) => {
+      try {
+        functions[value.type](value.data)
+      } catch (err) { }
+    })
+  }catch{}
 })

@@ -99,12 +99,15 @@ app.post("/MaoNaMassa", (req, res, next) => {
 });
 
 app.listen(7000,async ()=>{
-    console.log("Itens produzidos: Porta 7000")
-  const ret = await axios.get(serviceBusURL)
-
-  ret.data.forEach((value, index)=>{
-    try{
-      functions[value.type](value.data)
-    }catch(err){}
-  })
+  console.log("Itens produzidos: Porta 7000")
+  try{
+    const ret = await axios.get(serviceBusURL)
+    .catch(()=>{})
+  
+    ret.data.forEach((value, index)=>{
+      try{
+        functions[value.type](value.data)
+      }catch(err){}
+    })
+  }catch{}
 })

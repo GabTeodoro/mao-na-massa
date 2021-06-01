@@ -129,12 +129,15 @@ app.get("/MaoNaMassa", (req, res) => {
 app.listen(5000, async () => {
   console.log("Ingredientes: Porta 5000")
 
-  const ret = await axios.get(serviceBusURL)
-
-  ret.data.forEach((value) => {
-    try {
-      functions[value.type](value.data)
-    } catch (err) { }
-  })
+  try{
+    const ret = await axios.get(serviceBusURL)
+      .catch(()=>{})
+  
+    ret.data.forEach((value) => {
+      try {
+        functions[value.type](value.data)
+      } catch (err) { }
+    })
+  }catch{}
 })
 

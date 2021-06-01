@@ -89,13 +89,13 @@ app.listen(4000,async()=>{
   
   console.log("Receitas: porta 4000")
 
-  const ret = await axios.get(serviceBusURL)
-
-  ret.data.forEach((value, index)=>{
-    try{
-      functions[value.type](value.data)
-    }catch(err){
-
-    }
-  })
+  try{
+    const ret = await axios.get(serviceBusURL)
+      .catch(()=>{})
+    ret.data.forEach((value, index)=>{
+      try{
+        functions[value.type](value.data)
+      }catch(err){}
+    })
+  }catch{}
 })
