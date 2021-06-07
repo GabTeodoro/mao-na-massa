@@ -25,7 +25,8 @@
 
 .nav-notification-width{
   width: 3rem;
-
+  max-height: 20rem;
+  overflow-y: scroll;
 }
 
 .has-notification{

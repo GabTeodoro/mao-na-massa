@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NotificationService } from './notification.service';
 import { Subscription } from 'rxjs';
 import { notification } from './notification.model';
+import { NotificationService } from './notification.service';
 
 @Component({
   selector: 'app-header',
@@ -17,18 +17,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   verif: boolean;
 
   ngOnInit(): void {
-    console.log("ngOnInit()")
     this.notificationService.getNotification();
     this.notificationSubscription =
-    this.notificationService.getUpdatedNotificationList().subscribe((notification: notification[])=>{
-      this.notifications = notification
+      this.notificationService
+        .getUpdatedNotificationList()
+        .subscribe((notifications: notification[])=>{
+          this.notifications = notifications
+          this.verif = this.notifications.length > 0;
+      })
+  }
+
+  onBlur(){
+    if(this.verif){
+      this.notifications = []
+      this.notificationService.deleteNotification();
       this.verif = this.notifications.length > 0;
-      console.log("dentro do subscribe"+notification);
-    })
+    }
   }
 
   ngOnDestroy(): void {
     this.notificationSubscription.unsubscribe();
   }
-
 }

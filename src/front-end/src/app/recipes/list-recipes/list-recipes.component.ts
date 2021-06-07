@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
@@ -10,39 +11,30 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./list-recipes.component.css']
 })
 export class ListRecipesComponent implements OnInit{
-  recipes: Recipe[] = [{
-    id:'123',
-    lines:[{
-      id:'12233',
-      ingredient: 'Ingrediente 1',
-      quantity: 3,
-      measurement: "200",
-      measurementUnit: 'g',
-      expirationDate: '10/05/21',
-      price: 3
-    }],
-    minimumValue: 3,
-    priceSuggestion: 5,
-    productionDate: 'hoje',
-    profitPercentage: 10,
-    finalPrice: 10,
-    name: 'teste da receita',
-  }]
+  recipes: Recipe[] = []
 
   private recipeSubscription: Subscription;
-  constructor(public recipeService: RecipeService) { }
+  constructor(public recipeService: RecipeService, private router: Router) { }
 
   ngOnInit(): void {
-    this.recipeService.getRecipe();
+    this.recipeService.getRecipes();
     this.recipeSubscription = this.recipeService.getUpdatedRecipesListObservable()
-      .subscribe((ingredients: Recipe[]) => {
-        console.log(ingredients);
-        this.recipes = ingredients;
+      .subscribe((recipe: Recipe[]) => {
+        // console.log(ingredients);
+        this.recipes = recipe;
       });
   }
 
   onAddRecipe(form:NgForm){
     console.log(form.value)
+  }
+
+  onRemoveRecipe(id: string){
+    this.recipeService.removeRecipe(id)
+  }
+
+  onEditRecipe(id: string){
+    this.router.navigate(['add/recipe'],{ queryParams: { idRecipe: id } });
   }
 
   ngOnDestroy(): void {

@@ -1,39 +1,39 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { notification } from './notification.model';
-import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({providedIn: 'root'})
 export class NotificationService {
-  constructor(private httpClient: HttpClient, private router: Router) { }
-  ngOnInit(): void {}
+  constructor(private httpClient: HttpClient) { }
 
   private notifications: notification[] = [];
-  private updatedNotificationList = new Subject<notification[]>();
+  private updatedNotificationList = new Subject<notification[]>(); // funcao assincrona, todos os subjects escutam
+  private urlNotification = 'http://localhost:8000/MaoNaMassa'
 
-  getNotification():void{
-    const data = new Date()
-    const retorno:notification[] = [{
-      id: '123',
-      message: "O ingrediente {Insira seu ingrediente aqui} está em falta.",
-      date: data.getUTCDate(),
-      type: '123'
-    }]
-
-    this.notifications = retorno;
-    this.updatedNotificationList.next([...this.notifications])
-
-    console.log("está chamando o getNotification()")
+  // get pro backend, subscribe pega o retorno do backend e instancia as variaveis locais
+  getNotification(){
+    try{
+      this.httpClient
+      .get<{message: string, notifications: notification[]}>(this.urlNotification)
+      .subscribe((notif)=>{
+        this.notifications = notif.notifications;
+        this.updatedNotificationList.next([...this.notifications])
+      })
+    }catch{}
   }
-  deleteNotification():void{
 
+  deleteNotification(){
+    try{
+      this.httpClient.delete<{message:string}>(this.urlNotification).subscribe(()=>{
+        this.notifications = [];
+        this.updatedNotificationList.next([])
+      })
+    }catch{}
   }
 
   getUpdatedNotificationList(){
-    console.log(this.notifications)
     return this.updatedNotificationList.asObservable();
   }
-
 }

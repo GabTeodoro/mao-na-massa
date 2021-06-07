@@ -1,7 +1,7 @@
 export interface notification {
   id: String,
   message: String,
-  date: Number,
+  date: String,
   type: String,
 }
 

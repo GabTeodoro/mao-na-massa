@@ -72,7 +72,7 @@
           </a>
           <div class="dropdown-menu slide-out" aria-labelledby="navbarReceitas">
             <a class="dropdown-item" href="/add/ingredient">Cadastrar Ingrediente</a>
-            <a class="dropdown-item" href="/list/ingredients">Minhas Ingredientes</a>
+            <a class="dropdown-item" href="/list/ingredients">Meus Ingredientes</a>
           </div>
         </li>
         <li class="nav-item dropdown ">
@@ -83,6 +83,7 @@
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false"
+          (blur)="onBlur()"
           tabindex="-1">
           <img class="d-block bell-notification" src="assets/svg/bell.svg" alt="Notificações" />
           <div [ngClass]="{'has-notification': verif,'no-notification':!verif}"></div>
@@ -117,10 +118,8 @@
         </form>
       </div>
       <span class="separador"></span>
-      <ul>
-        <li><a mat-button  routerLink="/login" routerLinkActive="mat-accent">Login</a></li>
-        <li><a mat-button  routerLink="/singup" routerLinkActive="mat-accent">Cadastrar</a></li>
-      </ul>    
+      <a mat-button  routerLink="/login" routerLinkActive="mat-accent">Login</a>
+      <a mat-button  routerLink="/singup" routerLinkActive="mat-accent">Cadastrar</a>
     </div>
   </div>
 </nav>

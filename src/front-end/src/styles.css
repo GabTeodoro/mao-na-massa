@@ -3,6 +3,12 @@
 
 :root{
   --soft-yellow: #fbf5c5;
+  --main-color: #fbf5c5;
+  --accent-color: #FAAAD3;
+  --lighter-blue-color: #DCF6FA;
+  --light-blue-color: #CFDFFA;
+  --lighter-green-color: #CFFAE7;
+  --light-green-color: #C3FAC3;
 }
 
 .soft-yellow {

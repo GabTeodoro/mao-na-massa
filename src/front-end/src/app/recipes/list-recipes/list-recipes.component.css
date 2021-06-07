@@ -7,7 +7,7 @@ ul {
 }
 mat-expansion-panel{
   padding: 5px 0;
-
+  margin-bottom: 0.60rem;
   box-shadow: 2px 2px 5px 1px #ccc;
 }
 
@@ -36,7 +36,7 @@ span + span::before {
   height: 0.50rem;
   border-radius: 0.25rem;
   left: 0;
-  background-color: #ccc;
+  background-color: var(--light-blue-color);
   position: absolute;
   top: 50%;
   transform: translate(-50%,-50%);

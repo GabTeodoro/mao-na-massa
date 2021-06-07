@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class UsuarioService {
 
   private token: string;
+  private urlUser = "http://localhost:9000/MaoNaMassa"
 
   constructor(
     private httpClient: HttpClient,
@@ -22,7 +23,7 @@ export class UsuarioService {
       email: email,
       password: senha
     }
-    this.httpClient.post("http://localhost:3000/api/usuario/signup", usuario).
+    this.httpClient.put(this.urlUser+"/signup", usuario).
       subscribe({
         //vamos para página principal quando o usuário é criado com sucesso
         next: () => this.router.navigate(['/']),
@@ -37,7 +38,7 @@ export class UsuarioService {
       email: email,
       password: senha
     }
-    this.httpClient.post<{token: string}>("http://localhost:3000/api/usuario/login",
+    this.httpClient.put<{token: string}>(this.urlUser+"/login",
     usuario).subscribe(resposta => {
     this.token = resposta.token;
     this.router.navigate(['/']);
