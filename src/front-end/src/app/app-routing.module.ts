@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { usuariohGuard } from './Usuario/usuarioguard';
 
 // Ingredients
 import { AddIngredientsComponent } from './ingredients/add-ingredients/add-ingredients.component';
@@ -18,12 +19,12 @@ import { singupComponent} from './Singup/singup.component'
 
 const routes: Routes = [
   { path: '', component:  HomeComponent},
-  { path: 'add/ingredient', component: AddIngredientsComponent },
-  { path: 'list/ingredients', component: ListIngredientsComponent },
-  { path: 'add/recipe', component: AddRecipeComponent },
-  { path: 'list/recipes', component: ListRecipesComponent },
-  { path: 'add/items-produced', component: AddItemsProducedComponent },
-  { path: 'list/items-produced', component: ListItemsProducedComponent },
+  { path: 'add/ingredient', component: AddIngredientsComponent, canActivate:[usuariohGuard]},
+  { path: 'list/ingredients', component: ListIngredientsComponent, canActivate:[usuariohGuard] },
+  { path: 'add/recipe', component: AddRecipeComponent, canActivate:[usuariohGuard] },
+  { path: 'list/recipes', component: ListRecipesComponent, canActivate:[usuariohGuard] },
+  { path: 'add/items-produced', component: AddItemsProducedComponent, canActivate:[usuariohGuard] },
+  { path: 'list/items-produced', component: ListItemsProducedComponent, canActivate:[usuariohGuard] },
   { path: 'login', component: loginComponent},
   { path:'singup', component: singupComponent}
 ];
@@ -31,5 +32,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: "reload"})],
   exports: [RouterModule],
+  providers: [usuariohGuard]
 })
 export class AppRoutingModule {}

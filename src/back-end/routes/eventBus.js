@@ -3,6 +3,7 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 let events = []
+const filter = require('../models/filter/filter');
 
 app.post('/MaoNaMassa',(req, res)=>{
     const event = req.body;

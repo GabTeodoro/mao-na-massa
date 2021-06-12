@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { notification } from './notification.model';
 import { NotificationService } from './notification.service';
+import { UsuarioService } from '../Usuario/usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,21 @@ import { NotificationService } from './notification.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor(private notificationService: NotificationService) { }
+  constructor(private notificationService: NotificationService,
+    private usuarioService: UsuarioService) { }
 
   private notificationSubscription: Subscription;
   notifications: notification[] = [];
   verif: boolean;
+  private usuarioObserver: Subscription;
+  public autenticado: boolean = false;
 
   ngOnInit(): void {
+    this.autenticado = this.usuarioService.isAutenticado();
+    this.usuarioObserver = this.usuarioService.getStatusSubject()
+    .subscribe( (autenticado) => {
+      this.autenticado = autenticado;
+    })
     this.notificationService.getNotification();
     this.notificationSubscription =
       this.notificationService
@@ -24,7 +33,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         .subscribe((notifications: notification[])=>{
           this.notifications = notifications
           this.verif = this.notifications.length > 0;
-      })
+      }
+      )
+  }
+
+  public onLogout(): void{
+    this.usuarioService.logout();
   }
 
   onBlur(){
@@ -37,5 +51,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.notificationSubscription.unsubscribe();
+    this.usuarioObserver.unsubscribe();
   }
 }
