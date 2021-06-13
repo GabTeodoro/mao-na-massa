@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const axios = require("axios");
 const cors = require("cors");
 app.use(cors());
+const filter = require('../models/filter/filter');
 
 const userDB = process.env.MONGODB_RECIPE_USER;
 const passwordDB = process.env.MONGODB_RECIPE_PASSWORD;

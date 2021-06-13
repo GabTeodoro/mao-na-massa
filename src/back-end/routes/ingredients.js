@@ -18,6 +18,8 @@ const databaseDB = process.env.MONGODB_INGREDIENT_DATABASE;
 const eventBusURL = 'http://localhost:3000/MaoNaMassa';
 const ObjectId = require('mongodb').ObjectID;
 const ingredients = require("../models/ingredients/ingredients");
+const filter = require('../models/filter/filter');
+
 
 mongoose
   .connect(`mongodb+srv://${userDB}:${passwordDB}@${clusterDB}/${databaseDB}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })

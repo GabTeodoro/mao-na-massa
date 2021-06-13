@@ -8,6 +8,7 @@ app.use(express.json());
 const dotenv = require("dotenv");
 dotenv.config();
 const Notification = require("../models/notifications/notification");
+const filter = require('../models/filter/filter');
 
 const mongoose = require("mongoose");
 
