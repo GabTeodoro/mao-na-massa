@@ -70,7 +70,7 @@ app.get("/MaoNaMassa/:id", (req, res) => {
   }).catch((err) => console.log("Erro pegando um ingrediente.\n" + err));
 })
 
-app.put("/MaoNaMassa", (req, res) => {
+app.put("/MaoNaMassa",filter, (req, res) => {
   const ingred = new Ingredient({
     ingredient: req.body.ingredient,
     quantity: req.body.quantity,
@@ -87,7 +87,7 @@ app.put("/MaoNaMassa", (req, res) => {
     });
   }).catch((err) => console.log("Erro salvando.\nErro: " + err));
 })
-app.put("/MaoNaMassa/:id", (req, res) => {
+app.put("/MaoNaMassa/:id", filter,(req, res) => {
   const ingred = {
     ingredient: req.body.ingredient,
     quantity: req.body.quantity,
@@ -99,7 +99,7 @@ app.put("/MaoNaMassa/:id", (req, res) => {
   Ingredient.updateOne({ _id: req.body.id }, ingred).then(() => res.status(201).send({ message: "Atualizou!!" })).catch((err) => console.log("Erro salvando.\nErro: " + err));
 })
 
-app.delete("/MaoNaMassa/:id", (req, res) => {
+app.delete("/MaoNaMassa/:id", filter,(req, res) => {
   try {
     Ingredient.deleteOne({ _id: req.params.id }).then(() => {
       res.status(200).json({ message: "Deleted ingredient" });
@@ -110,7 +110,7 @@ app.delete("/MaoNaMassa/:id", (req, res) => {
 })
 
 
-app.post("/MaoNaMassa", (req, res) => {
+app.post("/MaoNaMassa", filter,(req, res) => {
   try {
     functions[req.body.type](req.body.data)
   } catch (err) {
