@@ -27,8 +27,10 @@ let allNotifications = [];
 const functions = {
   onCreatedNotifications: (document) => {
     document.map((line) => {
-      const notif = new Notification(line);
-      notif.save();
+      if(line.userId){
+        const notif = new Notification(line);
+        notif.save();
+      }
     });
   },
 };
@@ -49,6 +51,7 @@ app.put("/MaoNaMassa", (req, res, next) => {
   const date = new Date();
   const notif = new Notification({
     message: req.body.message,
+    userId: req.body.userId,
     date: date.toISOString(),
     type: req.body.type,
   });
@@ -68,8 +71,24 @@ app.get("/MaoNaMassa", (req, res, next) => {
     .catch((err) => console.log("Erro salvando.\nErro: " + err));
 });
 
+app.get("/MaoNaMassa/User/:id", (req, res, next) => {
+  Notification.find({userId: req.params.id})
+    .then((documents) => {
+      res.status(201).send({ message: "OK", notifications: documents });
+    })
+    .catch((err) => console.log("Erro salvando.\nErro: " + err));
+});
+
 app.delete("/MaoNaMassa", (req, res, next) => {
   Notification.deleteMany()
+    .then((documents) => {
+      res.status(201).send({ message: "OK", qtdeDeletados: documents.n });
+    })
+    .catch((err) => console.log("Erro excluindo.\nErro: " + err));
+});
+
+app.delete("/MaoNaMassa/User/:id", (req, res, next) => {
+  Notification.deleteMany({userId: req.params.id})
     .then((documents) => {
       res.status(201).send({ message: "OK", qtdeDeletados: documents.n });
     })

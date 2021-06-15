@@ -40,12 +40,13 @@ const functions = {
           const date = new Date();
           ingredientsQtd.push({
             message: message,
+            userId: ingre.userId,
             date: date,
             type: 1
           })
         }
       })
-      console.log(documents)
+      
       const envio = {
         type: "onCreatedNotifications",
         data: ingredientsQtd

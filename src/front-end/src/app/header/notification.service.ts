@@ -24,9 +24,29 @@ export class NotificationService {
     }catch{}
   }
 
+  getNotificationById(id: string){
+    try{
+      this.httpClient
+      .get<{message: string, notifications: notification[]}>(this.urlNotification+"/User/"+id)
+      .subscribe((notif)=>{
+        this.notifications = notif.notifications;
+        this.updatedNotificationList.next([...this.notifications])
+      })
+    }catch{}
+  }
+
   deleteNotification(){
     try{
       this.httpClient.delete<{message:string}>(this.urlNotification).subscribe(()=>{
+        this.notifications = [];
+        this.updatedNotificationList.next([])
+      })
+    }catch{}
+  }
+
+  deleteNotificationByUser(idUser: string){
+    try{
+      this.httpClient.delete<{message:string}>(this.urlNotification+"/User/"+idUser).subscribe(()=>{
         this.notifications = [];
         this.updatedNotificationList.next([])
       })

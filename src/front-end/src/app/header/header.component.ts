@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       console.log(this.usuarioService.isAutenticado())
       this.autenticado = autenticado;
     })
-    this.notificationService.getNotification();
+    this.notificationService.getNotificationById(localStorage.getItem("idUsuario"));
     this.notificationSubscription =
       this.notificationService
         .getUpdatedNotificationList()
@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onBlur(){
     if(this.verif){
       this.notifications = []
-      this.notificationService.deleteNotification();
+      this.notificationService.deleteNotificationByUser(localStorage.getItem("idUsuario"));
       this.verif = this.notifications.length > 0;
     }
   }
