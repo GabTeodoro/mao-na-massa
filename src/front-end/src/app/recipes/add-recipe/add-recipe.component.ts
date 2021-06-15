@@ -55,6 +55,7 @@ export class AddRecipeComponent implements OnInit {
     }
     const recipe:Recipe = {
       id: null,
+      userId: localStorage.getItem("idUsuario"),
       name: form.value.name,
       lines: ingredients,
       minimumValue: form.value.minimumValue,
@@ -124,7 +125,6 @@ export class AddRecipeComponent implements OnInit {
     const retIdAndName = id.split(";")
     let ingredient = this.ingredients.find(i => i.id === retIdAndName[0])
     let recipeRow = this.recipeRows.value[index];
-    // console.log(ingredient);
     this.recipeRows.controls[index].patchValue({
       id: ingredient.id,
       ingredient: id,
@@ -138,7 +138,7 @@ export class AddRecipeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeService.getIngredients();
+    this.recipeService.getIngredientsById(localStorage.getItem("idUsuario"));
     this.ingredientSubscription = this.recipeService
     .getUpdatedIngredientsListObservable()
     .subscribe((ingredients: Ingredient[]) => {

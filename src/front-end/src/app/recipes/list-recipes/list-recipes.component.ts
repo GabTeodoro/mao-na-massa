@@ -17,10 +17,9 @@ export class ListRecipesComponent implements OnInit{
   constructor(public recipeService: RecipeService, private router: Router) { }
 
   ngOnInit(): void {
-    this.recipeService.getRecipes();
+    this.recipeService.getRecipesById(localStorage.getItem("idUsuario"));
     this.recipeSubscription = this.recipeService.getUpdatedRecipesListObservable()
       .subscribe((recipe: Recipe[]) => {
-        // console.log(ingredients);
         this.recipes = recipe;
       });
   }

@@ -28,6 +28,7 @@ mongoose
 app.put('/MaoNaMassa',(req, res)=>{
   const recipe = new Recipe( {
     lines:req.body.lines,
+    userId: req.body.userId,
     minimumValue: req.body.minimumValue,
     suggestedPrice: req.body.priceSuggestion,
     productionDate: req.body.productionDate,
@@ -36,7 +37,6 @@ app.put('/MaoNaMassa',(req, res)=>{
     name: req.body.name
   })
   recipe.save().then((documents)=>{
-    console.log(documents)
     res.status(201).send({message:"Tudo certo",id: documents._id})
   }).catch((err)=>console.log("Erro salvando.\nErro: "+err))
 })
@@ -66,6 +66,12 @@ app.get('/MaoNaMassa/:id',(req, res)=>{
   }).catch((err)=>console.log("Erro consultando.\nErro: "+err))
 })
 
+app.get('/MaoNaMassa/User/:id',(req, res)=>{
+  Recipe.find({ userId: req.params.id}).then((documents)=>{
+    res.status(201).send({message: "OK",recipe:documents});
+  }).catch((err)=>console.log("Erro consultando.\nErro: "+err))
+})
+
 app.delete("/MaoNaMassa/:id", (req, res)=>{
   Recipe.deleteOne({ _id: req.params.id }).then((result) => {
     res.status(201).send({message:"Excluído"})
@@ -80,7 +86,6 @@ app.post("/MaoNaMassa", (req, res, next) => {
   
   try{
     functions[req.body.type](req.body.data)
-    console.log(req.body.type)
   }catch(err){}
   res.send({msg:'ok'}).status(201)
 
