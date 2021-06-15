@@ -18,7 +18,7 @@ export class ListItemsProducedComponent implements OnInit{
     constructor(public itemsProducedService: itemsProducedService, private router: Router) {}
 
     ngOnInit(): void {
-      this.itemsProducedService.getItemsProduced();
+      this.itemsProducedService.getItemsProducedById(localStorage.getItem("idUsuario"));
       this.itemsProducedSubscription = this.itemsProducedService
         .getUpdateditemsProducedListObservable()
         .subscribe((itemsProduced: itemsProduced[]) => {

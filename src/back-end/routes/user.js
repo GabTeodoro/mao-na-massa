@@ -44,7 +44,7 @@ app.put('/MaoNaMassa/login', (req, res, next) => {
       })
       .then(result => {
         if(!result){
-          return res.status(401).json({
+          res.status(401).json({
             mensagem: "Email ou senha inválidos"
           })
         }
@@ -63,7 +63,7 @@ app.put('/MaoNaMassa/login', (req, res, next) => {
         });
       })
       .catch(err => {
-        return res.status(401).json({
+        res.status(401).json({
           mensagem: "Login falhou: " + err
         })
       })

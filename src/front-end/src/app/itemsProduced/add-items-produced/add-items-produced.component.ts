@@ -31,6 +31,7 @@ export class AddItemsProducedComponent implements OnInit {
     if (this.modo === 'add'){
       const itemProduced: itemsProduced = {
         id: "",
+        userId: localStorage.getItem("idUsuario"),
         name: form.value.name,
         costValue: form.value.costValue,
         expirationDate: form.value.expirationDate,
@@ -42,6 +43,7 @@ export class AddItemsProducedComponent implements OnInit {
     }else{
       const itemProduced = {
         id: this.idItemProduced,
+        userId: localStorage.getItem("idUsuario"),
         name: form.value.name,
         costValue: form.value.costValue,
         expirationDate: form.value.expirationDate,

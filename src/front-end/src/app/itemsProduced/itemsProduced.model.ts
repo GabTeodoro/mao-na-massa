@@ -1,5 +1,6 @@
 export interface itemsProduced{
   id: string,
+  userId: string,
   name: string,
   quantity: number,
   productionDate: string,

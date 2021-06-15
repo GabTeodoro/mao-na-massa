@@ -37,6 +37,7 @@ app.put("/MaoNaMassa", (req, res, next) => {
   const itemsProduced = new ItemsProduced({
     quantity: req.body.quantity,
     name: req.body.name,
+    userId: req.body.userId,
     productionDate: req.body.productionDate,
     expirationDate: req.body.expirationDate,
     costValue: req.body.costValue,
@@ -79,6 +80,15 @@ app.get("/MaoNaMassa/:id", (req, res, next) => {
     res.status(200).json({
       message: "All right",
       itemProduced: documents[0],
+    });
+  });
+});
+
+app.get("/MaoNaMassa/User/:id", (req, res, next) => {
+  ItemsProduced.find({userId: req.params.id}).then((documents) => {
+    res.status(200).json({
+      message: "All right",
+      itemsProduced: documents,
     });
   });
 });

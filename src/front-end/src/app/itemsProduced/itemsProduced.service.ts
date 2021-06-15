@@ -58,6 +58,30 @@ export class itemsProducedService {
     })
   }
 
+  getItemsProducedById(id: String):void{
+    this.httpClient.get<{message: string,itemsProduced: any}>(this.urlItemsProduced+"/User/"+id)
+    .pipe(
+      map((data) => {
+        return data.itemsProduced.map((rec) => {
+          return {
+            id: rec._id,
+            userId: rec.userId,
+            name: rec.name,
+            quantity: rec.quantity,
+            productionDate: rec.productionDate,
+            expirationDate: rec.expirationDate,
+            costValue: rec.costValue,
+            totalValue: rec.totalValue
+          };
+        });
+      })
+    ).subscribe((itemsProduced)=>{
+      const item = itemsProduced;
+      this.itemsProduced = item
+      this.updateditemsProducedList.next([...this.itemsProduced])
+    })
+  }
+
   getItemProduced(id: String){
     return this.httpClient.get<{message: string,itemProduced: any}>(this.urlItemsProduced+`/${id}`)
   }
@@ -75,7 +99,6 @@ export class itemsProducedService {
   }
 
   additemsProduced(itemsProduced: itemsProduced) {
-    // console.log(itemsProduced)
     this.httpClient
       .put<{ message: string; id: string }>(
         this.urlItemsProduced,
