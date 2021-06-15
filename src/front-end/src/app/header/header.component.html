@@ -118,9 +118,9 @@
         </form>
       </div>
       <span class="separador"></span>
-      <a mat-button *ngIf="!autenticado"  routerLink="/login" routerLinkActive="mat-accent">Login</a>
-      <a mat-button  *ngIf="!autenticado" routerLink="/singup" routerLinkActive="mat-accent">Cadastrar</a>
-      <li><button *ngIf="autenticado" mat-button (click)="onLogout()">Logout</button></li>
+      <a mat-button *ngIf="!autenticado" class="login-buttons" routerLink="/login">Login</a>
+      <a mat-button  *ngIf="!autenticado" class="login-buttons" routerLink="/singup">Cadastrar</a>
+      <button *ngIf="autenticado" class="login-buttons" mat-button (click)="onLogout()">Logout</button>
     </div>
   </div>
 </nav>

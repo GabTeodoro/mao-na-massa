@@ -21,9 +21,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public autenticado: boolean = false;
 
   ngOnInit(): void {
-    this.autenticado = this.usuarioService.isAutenticado();
+    this.autenticado = localStorage.getItem("isAutenticado")=="true";
     this.usuarioObserver = this.usuarioService.getStatusSubject()
     .subscribe( (autenticado) => {
+      console.log(autenticado)
+      console.log(this.usuarioService.isAutenticado())
       this.autenticado = autenticado;
     })
     this.notificationService.getNotification();

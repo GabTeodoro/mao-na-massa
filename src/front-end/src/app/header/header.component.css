@@ -7,6 +7,18 @@
   background-color: var(--main-color);
 }
 
+.login-buttons{
+  color: #000;
+}
+
+.login-buttons:active{
+  color: var(--accent-color);
+}
+
+.login-buttons:focus{
+  color: var(--accent-color);
+}
+
 .bell-notification{
   width: 1.58rem;
   z-index: 1;
@@ -84,7 +96,6 @@ ul{
 }
 a{
   text-decoration: none;
-  color: white;
 }
 
 .separador{

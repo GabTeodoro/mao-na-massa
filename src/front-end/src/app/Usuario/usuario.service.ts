@@ -57,7 +57,7 @@ export class UsuarioService {
           this.tokenTimer = setTimeout(() => {
             this.logout();
           }, tempoValidadeToken * 10000);
-          console.log(resposta);
+          // console.log(resposta);
           this.autenticado = true;
           this.idUsuario = resposta.idUsuario;
           this.usuarioStatusSubject.next(true);
@@ -88,11 +88,13 @@ export class UsuarioService {
     localStorage.setItem('token', token);
     localStorage.setItem('validade', validade.toISOString());
     localStorage.setItem('idUsuario', idUsuario);
+    localStorage.setItem('isAutenticado', 'true');
   }
 
   private removerDadosDeAutenticacao() {
     localStorage.removeItem('token');
     localStorage.removeItem('validade');
     localStorage.removeItem('idUsuario');
+    localStorage.removeItem('isAutenticado');
   }
 }

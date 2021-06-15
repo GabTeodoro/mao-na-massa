@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { usuariohGuard } from './Usuario/usuarioguard';
+import { usuarioGuard } from './Usuario/usuarioguard';
 
 // Ingredients
 import { AddIngredientsComponent } from './ingredients/add-ingredients/add-ingredients.component';
@@ -19,19 +19,20 @@ import { singupComponent} from './Singup/singup.component'
 
 const routes: Routes = [
   { path: '', component:  HomeComponent},
-  { path: 'add/ingredient', component: AddIngredientsComponent, canActivate:[usuariohGuard]},
-  { path: 'list/ingredients', component: ListIngredientsComponent, canActivate:[usuariohGuard] },
-  { path: 'add/recipe', component: AddRecipeComponent, canActivate:[usuariohGuard] },
-  { path: 'list/recipes', component: ListRecipesComponent, canActivate:[usuariohGuard] },
-  { path: 'add/items-produced', component: AddItemsProducedComponent, canActivate:[usuariohGuard] },
-  { path: 'list/items-produced', component: ListItemsProducedComponent, canActivate:[usuariohGuard] },
+  { path: 'add/ingredient', component: AddIngredientsComponent, canActivate:[usuarioGuard]},
+  { path: 'list/ingredients', component: ListIngredientsComponent, canActivate:[usuarioGuard] },
+  { path: 'add/recipe', component: AddRecipeComponent, canActivate:[usuarioGuard] },
+  { path: 'list/recipes', component: ListRecipesComponent, canActivate:[usuarioGuard] },
+  { path: 'add/items-produced', component: AddItemsProducedComponent, canActivate:[usuarioGuard] },
+  { path: 'list/items-produced', component: ListItemsProducedComponent, canActivate:[usuarioGuard] },
   { path: 'login', component: loginComponent},
   { path:'singup', component: singupComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: "reload"})],
+  //,{onSameUrlNavigation: "reload"}
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [usuariohGuard]
+  providers: [usuarioGuard]
 })
 export class AppRoutingModule {}
