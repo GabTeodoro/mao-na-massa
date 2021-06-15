@@ -16,18 +16,26 @@ export class HomeComponent implements OnInit {
 
   private recipeSubscription: Subscription;
   private ingredientSubscription: Subscription;
-  constructor(public recipeService: HomeService,
+  constructor(public homeService: HomeService,
     private router: Router) { }
 
+  onEditRecipe(id: string){}
+
+  onRemoveRecipe(id: string){}
+
+  onEditIngredient(id: string){}
+
+  onRemoveIngredient(id: string){}
+
   ngOnInit(): void {
-    this.recipeService.getRecipes();
-    this.recipeService.getIngredients();
-    this.recipeSubscription = this.recipeService
+    this.homeService.getRecipesById(localStorage.getItem("idUsuario"));
+    this.homeService.getIngredientsById(localStorage.getItem("idUsuario"));
+    this.recipeSubscription = this.homeService
     .getUpdatedRecipesListObservable()
       .subscribe((recipe: Recipe[]) => {
         this.recipes = recipe;
       });
-    this.ingredientSubscription = this.recipeService
+    this.ingredientSubscription = this.homeService
     .getUpdatedIngredientsListObservable()
     .subscribe((ingredients: Ingredient[]) => {
       this.ingredients = ingredients;

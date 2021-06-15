@@ -26,7 +26,7 @@ import { ListRecipesComponent } from './recipes/list-recipes/list-recipes.compon
 import { RecipeService } from './recipes/recipe.service';
 import { itemsProducedService } from './itemsProduced/itemsProduced.service';
 import { HomeComponent } from './home/home.component';
-import {UsuarioService} from './Usuario/usuario.service';
+import { UsuarioService } from './Usuario/usuario.service';
 import { loginComponent } from './Login/login.component';
 import {singupComponent} from './Singup/singup.component'
 import { FooterComponent } from './footer/footer.component';
