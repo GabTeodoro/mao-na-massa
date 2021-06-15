@@ -43,6 +43,7 @@ export class AddRecipeComponent implements OnInit {
     for (let index = 0; index < this.recipeRows.length; index++) {
       let ing: Ingredient = {
         id: this.recipeRows.value[index].id,
+        userId: localStorage.getItem("idUsuario"),
         ingredient: this.recipeRows.value[index].ingredient.split(";")[1],
         quantity: this.recipeRows.value[index].quantity,
         measurement: this.recipeRows.value[index].measurement,

@@ -43,6 +43,31 @@ export class IngredientService {
       });
   }
 
+  getIngredientsById(id: String): void {
+    this.httpClient
+      .get<{ message: string; ingredients: any }>(
+        this.urlIngredient+"/User/"+id
+      )
+      .pipe(map((data) => {
+          return data.ingredients.map((ingredients) => {
+            return {
+              id: ingredients._id,
+              ingredient: ingredients.ingredient,
+              quantity: ingredients.quantity,
+              measurement: ingredients.measurement,
+              measurementUnit: ingredients.measurementUnit,
+              expirationDate: ingredients.expirationDate,
+              price: ingredients.price,
+            };
+          });
+        })
+      )
+      .subscribe((ingredients) => {
+        this.ingredients = ingredients;
+        this.updatedIngredientsList.next([...this.ingredients]);
+      });
+  }
+
   getIngredientsNumber(){
     this.httpClient
       .get<{ message: string; ingredients: any }>(

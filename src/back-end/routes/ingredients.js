@@ -20,7 +20,6 @@ const ObjectId = require('mongodb').ObjectID;
 const ingredients = require("../models/ingredients/ingredients");
 const filter = require('../models/filter/filter');
 
-
 mongoose
   .connect(`mongodb+srv://${userDB}:${passwordDB}@${clusterDB}/${databaseDB}?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -70,9 +69,19 @@ app.get("/MaoNaMassa/:id", (req, res) => {
   }).catch((err) => console.log("Erro pegando um ingrediente.\n" + err));
 })
 
-app.put("/MaoNaMassa",filter, (req, res) => {
+app.get("/MaoNaMassa/User/:id", (req, res) => {
+  Ingredient.find({ userId: req.params.id }).then((documents) => {
+    res.status(200).json({
+      message: "All right",
+      ingredients: documents,
+    });
+  }).catch((err) => console.log("Erro pegando um ingrediente.\n" + err));
+})
+
+app.put("/MaoNaMassa", (req, res) => {
   const ingred = new Ingredient({
     ingredient: req.body.ingredient,
+    userId: req.body.userId,
     quantity: req.body.quantity,
     measurement: req.body.measurement,
     measurementUnit: req.body.measurementUnit,
@@ -87,9 +96,10 @@ app.put("/MaoNaMassa",filter, (req, res) => {
     });
   }).catch((err) => console.log("Erro salvando.\nErro: " + err));
 })
-app.put("/MaoNaMassa/:id", filter,(req, res) => {
+app.put("/MaoNaMassa/:id", (req, res) => {
   const ingred = {
     ingredient: req.body.ingredient,
+    userId: req.body.userId,
     quantity: req.body.quantity,
     measurement: req.body.measurement,
     measurementUnit: req.body.measurementUnit,
@@ -99,7 +109,7 @@ app.put("/MaoNaMassa/:id", filter,(req, res) => {
   Ingredient.updateOne({ _id: req.body.id }, ingred).then(() => res.status(201).send({ message: "Atualizou!!" })).catch((err) => console.log("Erro salvando.\nErro: " + err));
 })
 
-app.delete("/MaoNaMassa/:id", filter,(req, res) => {
+app.delete("/MaoNaMassa/:id",(req, res) => {
   try {
     Ingredient.deleteOne({ _id: req.params.id }).then(() => {
       res.status(200).json({ message: "Deleted ingredient" });
@@ -110,7 +120,7 @@ app.delete("/MaoNaMassa/:id", filter,(req, res) => {
 })
 
 
-app.post("/MaoNaMassa", filter,(req, res) => {
+app.post("/MaoNaMassa", (req, res) => {
   try {
     functions[req.body.type](req.body.data)
   } catch (err) {

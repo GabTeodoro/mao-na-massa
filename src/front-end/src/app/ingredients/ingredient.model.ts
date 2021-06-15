@@ -1,5 +1,6 @@
 export interface Ingredient{
   id: string
+  userId: String
   ingredient: string
   quantity: number
   measurement: string

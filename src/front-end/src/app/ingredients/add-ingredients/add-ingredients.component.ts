@@ -57,6 +57,7 @@ export class AddIngredientsComponent implements OnInit {
     if (this.modo === 'add'){
       const ingredient: Ingredient = {
         id: null,
+        userId: localStorage.getItem("idUsuario"),
         ingredient: form.value.ingredient,
         quantity: form.value.quantity,
         measurement: form.value.measurement,
@@ -70,6 +71,7 @@ export class AddIngredientsComponent implements OnInit {
     }else{
       const ingredient: Ingredient = {
         id: this.paramValue,
+        userId: localStorage.getItem("idUsuario"),
         ingredient: form.value.ingredient,
         quantity: form.value.quantity,
         measurement: form.value.measurement,

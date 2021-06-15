@@ -25,7 +25,8 @@ export class ListIngredientsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ingredientService.getIngredients();
+    const idUsuario = localStorage.getItem("idUsuario");
+    this.ingredientService.getIngredientsById(idUsuario);
     this.ingredientSubscription = this.ingredientService
       .getUpdatedIngredientsListObservable()
       .subscribe((ingredients: Ingredient[]) => {
