@@ -2,6 +2,11 @@
     background-color: var(--main-color);
 }
 
+a{
+  display: inline-block;
+  text-overflow: ellipsis;
+}
+
 li{
   list-style-type: none;
 }
