@@ -63,9 +63,11 @@ app.put('/MaoNaMassa/login', (req, res, next) => {
         });
       })
       .catch(err => {
-        res.status(401).json({
-          mensagem: "Login falhou: " + err
-        })
+        try{
+          res.status(401).json({
+            mensagem: "Login falhou: " + err
+          })
+        }catch{}
       })
   })
 

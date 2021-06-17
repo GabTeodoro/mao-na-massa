@@ -4,12 +4,11 @@ router-outlet{
 
 div.w-100{
   height: calc(100vh - 3.688rem);
-  overflow-y: scroll;
+  overflow-y: auto;
+
 }
 main{
-  min-height: calc(100vh - 9.5rem - 3.688rem);
+  min-height: calc(100vh - 12.236rem);
   font-family: 'Lato', sans-serif;
-}
-app-footer{
-  position: sticky;
+  margin: 0;
 }
