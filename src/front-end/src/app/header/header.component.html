@@ -75,7 +75,7 @@
             <a class="dropdown-item" href="/list/ingredients">Meus Ingredientes</a>
           </div>
         </li>
-        <li class="nav-item dropdown ">
+        <li *ngIf="autenticado" class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle font-0"
           href="#"
           id="navbarNotificacoes"
@@ -100,7 +100,7 @@
       </ul>
 
       <div class="d-flex flex-lg-fill"></div>
-      <div class="d-flex">
+      <!-- <div class="d-flex">
         <form class="input-group w-auto">
           <input
             class="form-control"
@@ -116,7 +116,7 @@
             </span>
           </div>
         </form>
-      </div>
+      </div> -->
       <span class="separador"></span>
       <a mat-button *ngIf="!autenticado" class="login-buttons" routerLink="/login">Login</a>
       <a mat-button  *ngIf="!autenticado" class="login-buttons" routerLink="/singup">Cadastrar</a>

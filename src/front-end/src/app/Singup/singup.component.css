@@ -1,20 +1,24 @@
 mat-form-field, input{
-    width: 100%;
-  }
-  
-  mat-spinner{
-    margin: auto;
-  }
-  mat-card {
-        width: 70%;
-        margin: 10px auto;
-        height: 70vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+  width: 100%;
+}
+
+h2{
+  max-width: 20.96rem;
+}
+
+mat-spinner{
+  margin: auto;
+}
+mat-card {
+  width: 80%;
+  margin: 1rem 0;
+  padding: 9rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 button{
-    width: 100%;
-    margin: 10px auto;
-    height: 07vh;
+  width: 100%;
+  margin: 0.625rem auto;
+  height: 3.359rem;
 }
